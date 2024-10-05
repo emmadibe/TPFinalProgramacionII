@@ -1,5 +1,12 @@
 package org.example;
 
+import Controlador.DocenteControlador;
+import Modelos.ConsultasGenerales;
+import Modelos.DocenteModelo;
+import Modelos.EstudiantesModelo;
+import clasesGenerales.Docente;
+import com.codeup.TPFinal.ConexionTPFinal;
+
 import java.util.Scanner;
 
 public class Main {
@@ -8,9 +15,10 @@ public class Main {
 
     public static void main(String[] args)
     {
-        Main.opcionesMenuLogueo();
+        ConexionTPFinal.getConnection();
         int opcion;
         do{
+            Main.opcionesMenuLogueo();
             opcion = ingresar.nextInt();
             Main.menuLogueo(opcion);
         }while(opcion != 0);
@@ -29,6 +37,10 @@ public class Main {
         switch (opcion){
             case 1:
 
+                break;
+
+            case 2:
+                DocenteControlador.crearDocente();
                 break;
 
             case 0:
