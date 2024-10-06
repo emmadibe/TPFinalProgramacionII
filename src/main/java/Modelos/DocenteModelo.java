@@ -69,6 +69,30 @@ public class DocenteModelo extends General
         }
 
     }
+
+    public static boolean existeDocente(String nombre, String password)
+    {
+        Connection connection = null;
+        Statement statement = null;
+        boolean existe = false;
+        try {
+            connection = DriverManager.getConnection(dbURL, username, password);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM docentes WHERE nombre = '" + nombre + "' and password = '" + password + "'";
+            statement.executeUpdate(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return existe;
+
+    }
 }
 
 

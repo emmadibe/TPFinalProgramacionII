@@ -37,5 +37,9 @@ public class DocenteControlador
     {
 
     }
+    public void existeDocente()
+    {
+
+    }
 
 }
