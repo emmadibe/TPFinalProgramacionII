@@ -2,10 +2,9 @@ package Modelos;
 
 import clasesGenerales.Docente;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javax.print.Doc;
+import java.sql.*;
+
 public class DocenteModelo extends General
 {
 
@@ -23,8 +22,9 @@ public class DocenteModelo extends General
                     "    nombre VARCHAR(100)," +
                     "    apellido VARCHAR(100)," +
                     "    edad INT," +
-                    "    email VARCHAR(50)," +
-                    "    rama VARCHAR(50)" +
+                    "    email VARCHAR(50) UNIQUE," +
+                    "    rama VARCHAR(50)," +
+                    "    password VARCHAR(59)" +
                     ")";
             statement.executeUpdate(sql);
             System.out.println("Tabla docentes creada con exito");
@@ -48,17 +48,22 @@ public class DocenteModelo extends General
         try{
             connection = DriverManager.getConnection(dbURL, username, password);
             statement = connection.createStatement();
-            String sql = "INSERT INTO docentes(nombre, apellido, edad, email, rama) VALUES ('" +
+            String sql = "INSERT INTO docentes(nombre, apellido, edad, email, rama, password) VALUES ('" +
                     docente.getNombre().replace("'", "''") + "', '" +
                     docente.getApellido().replace("'", "''") + "', " +
                     docente.getEdad() + ", '" +
                     docente.getEmail().replace("'", "''") + "', '" +
-                    docente.getRama().replace("'", "''") + "')";
+                    docente.getRamaDocente().toString().replace("'", "''") + "', '" +
+                    docente.getPassword().replace("'","''") + "')";
 
             statement.executeUpdate(sql);
             System.out.println("Docente creado con éxito!");
         }catch (SQLException e) {
-            e.printStackTrace();
+            if(e.getSQLState().equals("23000")){ //La excepción "23000" indica un valor unique duplicado.
+                System.out.println("El email ingresado ya se encuewntra registrado.");
+            }else {
+                e.printStackTrace();
+            }
         } finally {
             try {
                 if(statement != null) statement.close();
@@ -70,16 +75,50 @@ public class DocenteModelo extends General
 
     }
 
-    public static boolean existeDocente(String nombre, String password)
+    public static Docente buscarDocente(String email, String pass)
     {
         Connection connection = null;
         Statement statement = null;
-        boolean existe = false;
+        Docente docente = null;
         try {
             connection = DriverManager.getConnection(dbURL, username, password);
             statement = connection.createStatement();
-            String sql = "SELECT * FROM docentes WHERE nombre = '" + nombre + "' and password = '" + password + "'";
-            statement.executeUpdate(sql);
+            String sql = "SELECT * FROM docentes WHERE email = '" + email + "' and password = '" + pass + "'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            if(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String nombre = resultSet.getString("nombre");
+                String apellido = resultSet.getString("apellido");
+                String rama = resultSet.getString("rama");
+                int edad = resultSet.getInt("edad");
+                docente = new Docente(id, nombre, apellido, edad, email, rama, pass);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (statement != null) statement.close();
+                if(connection != null) connection.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return docente;
+    }
+
+    public static boolean existeDocente(String email, String pass)
+    {
+        Connection connection = null;
+        Statement statement = null;
+        boolean existe = true;
+        try {
+            connection = DriverManager.getConnection(dbURL, username, password);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM docentes WHERE email = '" + email + "' and password = '" + pass + "'";
+            ResultSet resultSet =  statement.executeQuery(sql);
+            if(!resultSet.next()){
+                existe = false;
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }finally {
@@ -91,7 +130,50 @@ public class DocenteModelo extends General
             }
         }
         return existe;
+    }
 
+    public static void actualizarDocente(Docente docente)
+    {
+        Connection connection = null;
+        Statement statement = null;
+        try{
+            connection = DriverManager.getConnection(dbURL, username, password);
+            statement = connection.createStatement();
+
+            String sql = "UPDATE docentes SET nombre = '" + docente.getNombre() + "', apellido = '" + docente.getApellido() + "', edad = " + docente.getEdad() + ", rama = '" + docente.getRamaDocente() + "', email = '" + docente.getEmail() + "', password = '" + docente.getPassword() + "' WHERE id = " + docente.getId();
+            statement.executeUpdate(sql);
+            System.out.println("Docente actualizado con exito.");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try{
+                if(statement != null) statement.close();
+                if(connection != null) connection.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void eliminarDocente(Docente docente)
+    {
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            connection = DriverManager.getConnection(dbURL, username, password);
+            statement = connection.createStatement();
+            String sql = "DELETE FROM docentes WHERE id = " +  docente.getId();
+            statement.executeUpdate(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if(connection != null) connection.close();
+                if(statement != null) statement.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 }
 

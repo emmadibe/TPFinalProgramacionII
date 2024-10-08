@@ -4,12 +4,13 @@ import Controlador.DocenteControlador;
 import Modelos.ConsultasGenerales;
 import Modelos.DocenteModelo;
 import Modelos.EstudiantesModelo;
+import Vistas.MenuDocente;
 import clasesGenerales.Docente;
 import com.codeup.TPFinal.ConexionTPFinal;
-
 import java.util.Scanner;
 
-public class Main {
+public class Main
+{
 
     public static Scanner ingresar = new java.util.Scanner(System.in);
 
@@ -36,7 +37,12 @@ public class Main {
     {
         switch (opcion){
             case 1:
-
+                Docente docente = DocenteControlador.existeDocente();
+                if(docente!= null){
+                    MenuDocente.menuInicialDocentes(docente);
+                }else{
+                    System.out.println("Usuario y/o contrasenia incorrectos.");
+                }
                 break;
 
             case 2:

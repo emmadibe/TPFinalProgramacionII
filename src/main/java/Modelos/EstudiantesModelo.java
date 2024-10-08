@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 public class EstudiantesModelo extends General
 {
-
-
     public static void crearTabla()
     {
         Connection connection = null;

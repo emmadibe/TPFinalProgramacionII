@@ -21,7 +21,7 @@ public class ConsultasGenerales extends General
 
 
             String sql = "SELECT COUNT(*) FROM information_schema.tables " +
-                    "WHERE table_schema = 'EscuelasDB' AND table_name = '" + nombreTabla + "'"; //EL nombre de la tabla debe estar entre comillas simples.
+                    "WHERE table_schema = 'tpFinalProgramacionII' AND table_name = '" + nombreTabla + "'"; //EL nombre de la tabla debe estar entre comillas simples.
 
             resultSet = statement.executeQuery(sql);
 
@@ -44,4 +44,5 @@ public class ConsultasGenerales extends General
         }
         return existe;
     }
+
 }
