@@ -89,7 +89,7 @@ public class DocenteModelo extends General
                 int id = resultSet.getInt("id");
                 String nombre = resultSet.getString("nombre");
                 String apellido = resultSet.getString("apellido");
-                String rama = resultSet.getString("rama");
+                String rama = resultSet.getString("rama").toLowerCase(); //Hago el lowerCase para que aparezca en minuscula y asi identificar la rama.
                 int edad = resultSet.getInt("edad");
                 docente = new Docente(id, nombre, apellido, edad, email, rama, pass);
             }

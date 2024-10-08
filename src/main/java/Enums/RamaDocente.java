@@ -1,5 +1,7 @@
 package Enums;
 
+import java.util.Objects;
+
 public enum RamaDocente
 {
     HUMANIDADES("Humanidades", 1),
@@ -21,15 +23,15 @@ public enum RamaDocente
     public static RamaDocente asignarRama(String rama)
     {
         RamaDocente ramaDocente;
-        if(rama == "humanidades"){
+        if(Objects.equals(rama, "humanidades")){
             ramaDocente = HUMANIDADES;
-        }else if(rama == "letras"){
+        }else if(Objects.equals(rama, "letras")){
             ramaDocente = LETRAS;
-        }else if(rama == "Ciencias Exactas"){
+        }else if(Objects.equals(rama, "Ciencias Exactas")){
             ramaDocente = CIENCIASEXACTAS;
-        }else if(rama == "Artistica"){
+        }else if(Objects.equals(rama, "Artistica")){
             ramaDocente = ARTISTICA;
-        }else if(rama == "Educacion Fisica"){
+        }else if(Objects.equals(rama, "Educacion Fisica")){
             ramaDocente = EDUCACIONFISICA;
         }else{
             ramaDocente = OTRO;
