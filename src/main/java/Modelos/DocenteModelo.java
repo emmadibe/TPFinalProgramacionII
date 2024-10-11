@@ -110,17 +110,17 @@ public class DocenteModelo extends General
     {
         Connection connection = null;
         Statement statement = null;
-        boolean existe = true;
+        boolean existe = false;
         try {
             connection = DriverManager.getConnection(dbURL, username, password);
             statement = connection.createStatement();
             String sql = "SELECT * FROM docentes WHERE email = '" + email + "' and password = '" + pass + "'";
             ResultSet resultSet =  statement.executeQuery(sql);
-            if(!resultSet.next()){
-                existe = false;
+            if(resultSet.next()){
+                existe = true;
             }
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("Aún no existe la tabla docentes.");
         }finally {
             try {
                 if (statement != null) statement.close();
@@ -132,24 +132,35 @@ public class DocenteModelo extends General
         return existe;
     }
 
-    public static void actualizarDocente(Docente docente)
-    {
+    public static void actualizarDocente(Docente docente) {
         Connection connection = null;
-        Statement statement = null;
-        try{
+        PreparedStatement preparedStatement = null;
+        try {
             connection = DriverManager.getConnection(dbURL, username, password);
-            statement = connection.createStatement();
+            String sql = "UPDATE docentes SET nombre = ?, apellido = ?, edad = ?, rama = ?, email = ?, password = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, docente.getNombre());
+            preparedStatement.setString(2, docente.getApellido());
+            preparedStatement.setInt(3, docente.getEdad());
+            preparedStatement.setString(4, docente.getRamaDocente().toString());
+            preparedStatement.setString(5, docente.getEmail());
+            preparedStatement.setString(6, docente.getPassword());
+            preparedStatement.setInt(7, docente.getId());
 
-            String sql = "UPDATE docentes SET nombre = '" + docente.getNombre() + "', apellido = '" + docente.getApellido() + "', edad = " + docente.getEdad() + ", rama = '" + docente.getRamaDocente() + "', email = '" + docente.getEmail() + "', password = '" + docente.getPassword() + "' WHERE id = " + docente.getId();
-            statement.executeUpdate(sql);
-            System.out.println("Docente actualizado con exito.");
-        }catch (SQLException e){
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Docente actualizado con éxito.");
+            } else {
+                System.out.println("No se encontró el docente con el ID proporcionado.");
+                System.out.println("ID:  " + docente.getId());
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try{
-                if(statement != null) statement.close();
-                if(connection != null) connection.close();
-            }catch (SQLException e){
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }

@@ -42,12 +42,14 @@ public class DocenteControlador
         DocenteModelo.eliminarDocente(docente);
         System.out.println("Has sido eliminado.");
     }
-    public static void editarDocente(Docente docente)
+    public static Docente editarDocente(Docente docente)
     {
         System.out.println("Tus datos actuales: ");
         docente.imprimirUnDocente();
         System.out.println("Nuevos datos: ");
         Docente docenteNuevo = Docente.crearDocente();
+        docenteNuevo.setId(docente.getId()); //El id debe ser el que ya tenía para poder editarlo.
         DocenteModelo.actualizarDocente(docenteNuevo);
+        return  docenteNuevo;
     }
 }

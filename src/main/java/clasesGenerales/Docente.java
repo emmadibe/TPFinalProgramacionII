@@ -71,6 +71,14 @@ public class Docente extends Persona
         System.out.println("-----------------------------------");
     }
 
+    public void actualizarAtributosDocente(Docente docenteNuevo)
+    {
+        this.setNombre(docenteNuevo.getNombre());
+        this.setApellido(docenteNuevo.getApellido());
+        this.setEdad(docenteNuevo.getEdad());
+        this.setRamaDocente(docenteNuevo.getRamaDocente());
+        this.setPassword(docenteNuevo.getPassword());
+    }
 
     public String getPassword(){
         return password;

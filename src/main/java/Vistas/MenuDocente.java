@@ -33,7 +33,8 @@ public class MenuDocente
                 docente.imprimirUnDocente();
                 break;
             case 2:
-                DocenteControlador.editarDocente(docente);
+                Docente docenteNuevo = DocenteControlador.editarDocente(docente);
+                docente.actualizarAtributosDocente(docenteNuevo); //ACTUALIZO LOS VALORES DE LOS ATRIBUTOS DEL DOCENTE EN EL PROGRAMA TAMBIÉN.
                 break;
             default:
                 System.out.println("Opcion inválida.");
