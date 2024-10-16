@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Curso implements Entidades<Curso>
 {
+    private int id;
     private String nombre;
     private String escuela;
     private int cantidadAlumnos;
@@ -32,12 +33,13 @@ public class Curso implements Entidades<Curso>
         String nombre = ingresar.nextLine();
         System.out.println("Cantidad de alumnos: ");
         int cantAlumnos = ingresar.nextInt();
+        ingresar.nextLine();
         System.out.println("Materia: ");
         String materia = ingresar.nextLine();
         System.out.println("Escuela: ");
         String escuela = ingresar.nextLine();
 
-        return new Curso(nombre, cantidadAlumnos, materia, escuela);
+        return new Curso(nombre, cantAlumnos, materia, escuela);
     }
 
     @Override
@@ -89,5 +91,13 @@ public class Curso implements Entidades<Curso>
 
     public void setMateria(String materia) {
         this.materia = materia;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

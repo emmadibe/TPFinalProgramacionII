@@ -79,16 +79,16 @@ public class CursoModelo extends General implements Modelos<Curso>
         try {
             connection = DriverManager.getConnection(dbURL, username, password);
             statement = connection.createStatement();
-            String sql = "INSERT into cursos(nombre, cantAlumnos, escuela, materia)" +
+            String sql = "INSERT INTO cursos(nombre, cantAlumnos, escuela, materia) " +
                     "VALUES ('" +
-                            curso.getNombre().replace("'", "''") + "', '" +
-                            curso.getCantidadAlumnos() + "', '" +
-                            curso.getEscuela().replace("'", "''") + "', '" +
-                            curso.getMateria().replace("'", "''") + "', ";
+                    curso.getNombre().replace("'", "''") + "', '" +
+                    curso.getCantidadAlumnos() + "', '" +
+                    curso.getEscuela().replace("'", "''") + "', '" +
+                    curso.getMateria().replace("'", "''") + "')";
             statement.executeUpdate(sql);
             System.out.println("Curso nuevo creado con éxito!!");
         }catch (SQLException e){
-            System.out.println("ERROR!");
+            e.printStackTrace();
         }finally {
             try {
                 if(statement != null)statement.close();
@@ -100,7 +100,24 @@ public class CursoModelo extends General implements Modelos<Curso>
     }
 
     @Override
-    public void eliminarBDD(Curso curso) {
-
+    public void eliminarBDD(Curso curso)
+    {
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            connection = DriverManager.getConnection(dbURL, username, password);
+            statement = connection.createStatement();
+            String sql = "DELETE FROM cursos WHERE id = " + curso.getId();
+            statement.executeUpdate(sql);
+        }catch (SQLException e){
+            System.out.println("No se pudo eliminar el curso");
+        }finally {
+            try {
+                if(connection != null) connection.close();
+                if(statement != null) statement.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ import Controlador.DocenteControlador;
 import Modelos.CursoModelo;
 import Modelos.General;
 import Vistas.MenuDocente;
+import clasesGenerales.Curso;
 import clasesGenerales.Docente;
 import com.codeup.TPFinal.ConexionTPFinal;
 import java.util.Scanner;

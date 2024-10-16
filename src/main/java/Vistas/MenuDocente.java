@@ -1,5 +1,6 @@
 package Vistas;
 
+import Controlador.CursoControlador;
 import Controlador.DocenteControlador;
 import clasesGenerales.Docente;
 
@@ -27,6 +28,7 @@ public class MenuDocente
     public static void menuPrincipalDocente(int opcion, Docente docente)
     {
         DocenteControlador docenteControlador = new DocenteControlador();
+        CursoControlador cursoControlador = new CursoControlador();
         switch (opcion){
             case 0:
                 System.out.println("Sesión cerrada.");
@@ -38,6 +40,7 @@ public class MenuDocente
                 docenteControlador.editar(docente);
                 break;
             case 4: //Crear un nuevo curso
+                cursoControlador.crear();
                 break;
             default:
                 System.out.println("Opcion inválida.");

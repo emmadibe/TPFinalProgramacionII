@@ -16,7 +16,7 @@ public class CursoControlador implements Controladores<Curso>
         if(!cursoControlador.existeTabla()){ //Si no existe la tabla en la bdd, la crea
             cursoModelo.crearTablaBDD();
         }
-        curso.crearInstancia();
+        curso = curso.crearInstancia();
         cursoModelo.agregarBDD(curso);
     }
 
