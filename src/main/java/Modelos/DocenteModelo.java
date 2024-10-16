@@ -107,7 +107,7 @@ public class DocenteModelo extends General implements Modelos<Docente>
         return docente;
     }
 
-    public boolean existeBDD(Docente docente)
+    public boolean existeRegistroBDD(Docente docente)
     {
         String email = docente.getEmail();
         String pass = docente.getPassword();

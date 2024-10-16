@@ -1,6 +1,8 @@
 package org.example;
 
 import Controlador.DocenteControlador;
+import Modelos.CursoModelo;
+import Modelos.General;
 import Vistas.MenuDocente;
 import clasesGenerales.Docente;
 import com.codeup.TPFinal.ConexionTPFinal;

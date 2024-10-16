@@ -28,7 +28,7 @@ public class DocenteControlador implements Controladores<Docente>
     public  Docente existe()
     {
         Docente docente = DocenteVistas.buscarDocenteVista();
-        if(docenteModelo.existeBDD(docente)){ //Si ya sé que existe el docente con ese email y esa contraseña, me lo traigo.
+        if(docenteModelo.existeRegistroBDD(docente)){ //Si ya sé que existe el docente con ese email y esa contraseña, me lo traigo.
             docente = DocenteModelo.buscar(docente.getEmail(), docente.getPassword());
         }else{
             docente = null; //Si no existe, docente debe valer null.
