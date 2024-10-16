@@ -16,7 +16,8 @@ public class MenuDocente
             MenuDocente.opcionesMenuInicialDocente(docente);
             opcion = ingresar.nextInt();
             if(opcion == 3){
-                DocenteControlador.eliminarDocente(docente);
+                DocenteControlador docenteControlador = new DocenteControlador();
+                docenteControlador.eliminar(docente);
                 opcion = 0;
             }
             MenuDocente.menuPrincipalDocente(opcion, docente);
@@ -25,15 +26,18 @@ public class MenuDocente
 
     public static void menuPrincipalDocente(int opcion, Docente docente)
     {
+        DocenteControlador docenteControlador = new DocenteControlador();
         switch (opcion){
             case 0:
                 System.out.println("Sesión cerrada.");
                 break;
-            case 1:
-                docente.imprimirUnDocente();
+            case 1: //Ver datos.
+                docente.imprimirUnaInstancia();
                 break;
-            case 2:
-                DocenteControlador.editarDocente(docente);
+            case 2://Editar datos
+                docenteControlador.editar(docente);
+                break;
+            case 4: //Crear un nuevo curso
                 break;
             default:
                 System.out.println("Opcion inválida.");
@@ -49,5 +53,6 @@ public class MenuDocente
         System.out.println("1)Ver sus datos. ");
         System.out.println("2)Actualizar datos.");
         System.out.println("3)Eliminar mi usuario.");
+        System.out.println("4)Crear un nuevo curso.");
     }
 }

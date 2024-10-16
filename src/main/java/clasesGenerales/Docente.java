@@ -1,10 +1,11 @@
 package clasesGenerales;
 
 import Enums.RamaDocente;
+import interfaces.Entidades;
 
 import java.util.Scanner;
 
-public class Docente extends Persona
+public class Docente extends Persona implements Entidades<Docente>
 {
     private String email;
     private RamaDocente ramaDocente;
@@ -38,7 +39,7 @@ public class Docente extends Persona
         this.setRamaDocente(RamaDocente.asignarRama(rama));
         this.setPassword(password);
     }
-    public static Docente crearDocente()
+    public Docente crearInstancia()
     {
         System.out.println("Nombre: ");
         String nombre = ingresar.nextLine();
@@ -59,7 +60,17 @@ public class Docente extends Persona
         return docente;
     }
 
-    public void imprimirUnDocente()
+    public void actualizarSeteo(Docente docenteNuevosDatos)
+    {
+        this.setNombre(docenteNuevosDatos.getNombre());
+        this.setApellido(docenteNuevosDatos.getApellido());
+        this.setEdad(docenteNuevosDatos.getEdad());
+        this.setEmail(docenteNuevosDatos.getEmail());
+        this.setPassword(docenteNuevosDatos.getPassword());
+        this.setRamaDocente(docenteNuevosDatos.getRamaDocente());
+    }
+
+    public void imprimirUnaInstancia()
     {
         System.out.println("-----------------------------------");
         System.out.println("ID: " + this.getId());

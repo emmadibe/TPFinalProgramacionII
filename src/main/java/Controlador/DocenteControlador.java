@@ -1,53 +1,54 @@
 package Controlador;
 
-import Modelos.ConsultasGenerales;
 import Modelos.DocenteModelo;
+import Modelos.General;
 import Vistas.DocenteVistas;
 import clasesGenerales.Docente;
-import com.codeup.TPFinal.ConexionTPFinal;
-import Modelos.DocenteModelo;
+import interfaces.Controladores;
 
-import java.sql.Connection;
-import java.sql.Statement;
-
-public class DocenteControlador
+public class DocenteControlador implements Controladores<Docente>
 {
-    public static void crearDocente()
+    DocenteModelo docenteModelo = new DocenteModelo();
+    public void crear()
     {
-        if(!DocenteControlador.existeTablaDocente()){ //Si no existe una tabla llamada docentes, crea una.
-            DocenteModelo.crearTabla();
+        DocenteControlador docenteControlador  = new DocenteControlador();
+        if(!docenteControlador.existeTabla()){ //Si no existe una tabla llamada docentes, crea una.
+            docenteModelo.crearTablaBDD();
         }
-        Docente docente = Docente.crearDocente();
-        DocenteModelo.agregarDocente(docente);
+        Docente docente = new Docente();
+        docente = docente.crearInstancia();
+        docenteModelo.agregarBDD(docente);
     }
 
-    public static boolean existeTablaDocente()
+    public boolean existeTabla()
     {
-        return ConsultasGenerales.ExisteTabla("docentes");
+        return General.existeTabla("docentes");
     }
 
-    public static Docente existeDocente()
+    public  Docente existe()
     {
         Docente docente = DocenteVistas.buscarDocenteVista();
-        if(DocenteModelo.existeDocente(docente.getEmail(), docente.getPassword())){ //Si ya sé que existe el docente con ese email y esa contraseña, me lo traigo.
-            docente = DocenteModelo.buscarDocente(docente.getEmail(), docente.getPassword());
+        if(docenteModelo.existeBDD(docente)){ //Si ya sé que existe el docente con ese email y esa contraseña, me lo traigo.
+            docente = DocenteModelo.buscar(docente.getEmail(), docente.getPassword());
         }else{
             docente = null; //Si no existe, docente debe valer null.
         }
         return docente;
     }
 
-    public static void eliminarDocente(Docente docente)
+    public void eliminar(Docente docente)
     {
-        DocenteModelo.eliminarDocente(docente);
+        docenteModelo.eliminarBDD(docente);
         System.out.println("Has sido eliminado.");
     }
-    public static void editarDocente(Docente docente)
+    public void editar(Docente docente)
     {
         System.out.println("Tus datos actuales: ");
-        docente.imprimirUnDocente();
+        docente.imprimirUnaInstancia();
         System.out.println("Nuevos datos: ");
-        Docente docenteNuevo = Docente.crearDocente();
-        DocenteModelo.actualizarDocente(docenteNuevo);
+        Docente docenteNuevo = docente.crearInstancia();
+        docenteNuevo.setId(docente.getId());
+        docenteModelo.actualizarBDD(docenteNuevo);
+        docente.actualizarSeteo(docenteNuevo);
     }
 }

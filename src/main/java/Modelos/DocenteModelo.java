@@ -1,14 +1,15 @@
 package Modelos;
 
 import clasesGenerales.Docente;
+import interfaces.Modelos;
 
 import javax.print.Doc;
 import java.sql.*;
 
-public class DocenteModelo extends General
+public class DocenteModelo extends General implements Modelos<Docente>
 {
 
-    public static void crearTabla()
+    public void crearTablaBDD()
     {
         Connection connection = null;
         Statement statement = null;
@@ -40,7 +41,7 @@ public class DocenteModelo extends General
         }
     }
 
-    public static void agregarDocente(Docente docente)
+    public void agregarBDD(Docente docente)
     {
         Connection connection = null;
         Statement statement = null;
@@ -75,7 +76,7 @@ public class DocenteModelo extends General
 
     }
 
-    public static Docente buscarDocente(String email, String pass)
+    public static Docente buscar(String email, String pass)
     {
         Connection connection = null;
         Statement statement = null;
@@ -106,8 +107,10 @@ public class DocenteModelo extends General
         return docente;
     }
 
-    public static boolean existeDocente(String email, String pass)
+    public boolean existeBDD(Docente docente)
     {
+        String email = docente.getEmail();
+        String pass = docente.getPassword();
         Connection connection = null;
         Statement statement = null;
         boolean existe = true;
@@ -132,7 +135,7 @@ public class DocenteModelo extends General
         return existe;
     }
 
-    public static void actualizarDocente(Docente docente)
+    public void actualizarBDD(Docente docente)
     {
         Connection connection = null;
         Statement statement = null;
@@ -155,7 +158,7 @@ public class DocenteModelo extends General
         }
     }
 
-    public static void eliminarDocente(Docente docente)
+    public void eliminarBDD(Docente docente)
     {
         Connection connection = null;
         Statement statement = null;
