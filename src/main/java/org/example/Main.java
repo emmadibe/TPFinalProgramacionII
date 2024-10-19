@@ -1,10 +1,10 @@
 package org.example;
 
 import Controlador.DocenteControlador;
-import Modelos.ConsultasGenerales;
-import Modelos.DocenteModelo;
-import Modelos.EstudiantesModelo;
+import Modelos.CursoModelo;
+import Modelos.General;
 import Vistas.MenuDocente;
+import clasesGenerales.Curso;
 import clasesGenerales.Docente;
 import com.codeup.TPFinal.ConexionTPFinal;
 import java.util.Scanner;
@@ -35,9 +35,10 @@ public class Main
 
     public static void menuLogueo(int opcion)
     {
+        DocenteControlador docenteControlador = new DocenteControlador();
         switch (opcion){
             case 1:
-                Docente docente = DocenteControlador.existeDocente();
+                Docente docente = docenteControlador.existe();
                 if(docente!= null){
                     MenuDocente.menuInicialDocentes(docente);
                 }else{
@@ -46,7 +47,7 @@ public class Main
                 break;
 
             case 2:
-                DocenteControlador.crearDocente();
+                docenteControlador.crear();
                 break;
 
             case 0:

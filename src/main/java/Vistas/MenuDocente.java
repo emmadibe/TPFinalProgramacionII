@@ -1,5 +1,6 @@
 package Vistas;
 
+import Controlador.CursoControlador;
 import Controlador.DocenteControlador;
 import clasesGenerales.Docente;
 
@@ -16,7 +17,8 @@ public class MenuDocente
             MenuDocente.opcionesMenuInicialDocente(docente);
             opcion = ingresar.nextInt();
             if(opcion == 3){
-                DocenteControlador.eliminarDocente(docente);
+                DocenteControlador docenteControlador = new DocenteControlador();
+                docenteControlador.eliminar(docente);
                 opcion = 0;
             }
             MenuDocente.menuPrincipalDocente(opcion, docente);
@@ -25,16 +27,23 @@ public class MenuDocente
 
     public static void menuPrincipalDocente(int opcion, Docente docente)
     {
+        DocenteControlador docenteControlador = new DocenteControlador();
+        CursoControlador cursoControlador = new CursoControlador(docente.getId());
         switch (opcion){
             case 0:
                 System.out.println("Sesión cerrada.");
                 break;
-            case 1:
-                docente.imprimirUnDocente();
+            case 1: //Ver datos.
+                docente.imprimirUnaInstancia();
                 break;
-            case 2:
-                Docente docenteNuevo = DocenteControlador.editarDocente(docente);
-                docente.actualizarAtributosDocente(docenteNuevo); //ACTUALIZO LOS VALORES DE LOS ATRIBUTOS DEL DOCENTE EN EL PROGRAMA TAMBIÉN.
+            case 2://Editar datos
+                docenteControlador.editar(docente);
+                break;
+            case 4: //Crear un nuevo curso
+                cursoControlador.crear();
+                break;
+            case 5: //Ver todos los cursos que posee el docente.
+                cursoControlador.traer();
                 break;
             default:
                 System.out.println("Opcion inválida.");
@@ -50,5 +59,7 @@ public class MenuDocente
         System.out.println("1)Ver sus datos. ");
         System.out.println("2)Actualizar datos.");
         System.out.println("3)Eliminar mi usuario.");
+        System.out.println("4)Crear un nuevo curso.");
+        System.out.println("5)Ver mis cursos");
     }
 }

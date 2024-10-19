@@ -1,14 +1,16 @@
 package Modelos;
 
 import clasesGenerales.Docente;
+import interfaces.Modelos;
 
 import javax.print.Doc;
 import java.sql.*;
 
-public class DocenteModelo extends General
+public class DocenteModelo extends General implements Modelos<Docente>
 {
 
-    public static void crearTabla()
+
+    public void crearTablaBDD()
     {
         Connection connection = null;
         Statement statement = null;
@@ -40,7 +42,7 @@ public class DocenteModelo extends General
         }
     }
 
-    public static void agregarDocente(Docente docente)
+    public void agregarBDD(Docente docente)
     {
         Connection connection = null;
         Statement statement = null;
@@ -75,7 +77,7 @@ public class DocenteModelo extends General
 
     }
 
-    public static Docente buscarDocente(String email, String pass)
+    public static Docente buscar(String email, String pass)
     {
         Connection connection = null;
         Statement statement = null;
@@ -106,21 +108,23 @@ public class DocenteModelo extends General
         return docente;
     }
 
-    public static boolean existeDocente(String email, String pass)
+    public boolean existeRegistroBDD(Docente docente)
     {
+        String email = docente.getEmail();
+        String pass = docente.getPassword();
         Connection connection = null;
         Statement statement = null;
-        boolean existe = false;
+        boolean existe = true;
         try {
             connection = DriverManager.getConnection(dbURL, username, password);
             statement = connection.createStatement();
             String sql = "SELECT * FROM docentes WHERE email = '" + email + "' and password = '" + pass + "'";
             ResultSet resultSet =  statement.executeQuery(sql);
-            if(resultSet.next()){
-                existe = true;
+            if(!resultSet.next()){
+                existe = false;
             }
         }catch (SQLException e){
-            System.out.println("Aún no existe la tabla docentes.");
+            e.printStackTrace();
         }finally {
             try {
                 if (statement != null) statement.close();
@@ -132,41 +136,30 @@ public class DocenteModelo extends General
         return existe;
     }
 
-    public static void actualizarDocente(Docente docente) {
+    public void actualizarBDD(Docente docente)
+    {
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
+        Statement statement = null;
+        try{
             connection = DriverManager.getConnection(dbURL, username, password);
-            String sql = "UPDATE docentes SET nombre = ?, apellido = ?, edad = ?, rama = ?, email = ?, password = ? WHERE id = ?";
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, docente.getNombre());
-            preparedStatement.setString(2, docente.getApellido());
-            preparedStatement.setInt(3, docente.getEdad());
-            preparedStatement.setString(4, docente.getRamaDocente().toString());
-            preparedStatement.setString(5, docente.getEmail());
-            preparedStatement.setString(6, docente.getPassword());
-            preparedStatement.setInt(7, docente.getId());
+            statement = connection.createStatement();
 
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Docente actualizado con éxito.");
-            } else {
-                System.out.println("No se encontró el docente con el ID proporcionado.");
-                System.out.println("ID:  " + docente.getId());
-            }
-        } catch (SQLException e) {
+            String sql = "UPDATE docentes SET nombre = '" + docente.getNombre() + "', apellido = '" + docente.getApellido() + "', edad = " + docente.getEdad() + ", rama = '" + docente.getRamaDocente() + "', email = '" + docente.getEmail() + "', password = '" + docente.getPassword() + "' WHERE id = " + docente.getId();
+            statement.executeUpdate(sql);
+            System.out.println("Docente actualizado con exito.");
+        }catch (SQLException e){
             e.printStackTrace();
-        } finally {
-            try {
-                if (preparedStatement != null) preparedStatement.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
+        }finally {
+            try{
+                if(statement != null) statement.close();
+                if(connection != null) connection.close();
+            }catch (SQLException e){
                 e.printStackTrace();
             }
         }
     }
 
-    public static void eliminarDocente(Docente docente)
+    public void eliminarBDD(Docente docente)
     {
         Connection connection = null;
         Statement statement = null;
