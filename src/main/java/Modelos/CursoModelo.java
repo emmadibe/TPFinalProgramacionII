@@ -1,6 +1,8 @@
 package Modelos;
 
 import clasesGenerales.Curso;
+import clasesGenerales.CursoArrayList;
+import clasesGenerales.Docente;
 import interfaces.Modelos;
 
 import java.sql.*;
@@ -36,6 +38,40 @@ public class CursoModelo extends General implements Modelos<Curso>
                 e.printStackTrace();
             }
         }
+    }
+
+    public CursoArrayList traerTodos(int idDocente)
+    {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        CursoArrayList cursoArrayList = new CursoArrayList(100);
+        try {
+            connection = DriverManager.getConnection(dbURL, username, password);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM cursos WHERE docenteID = " + idDocente;
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                String nombreCurso = resultSet.getString("nombre");
+                String escuela = resultSet.getString("escuela");
+                String materia = resultSet.getString("materia");
+                int cantAlumnos = resultSet.getInt("cantAlumnos");
+                int id = resultSet.getInt("id");
+                int idDelDocente = resultSet.getInt("docenteID");
+                Curso curso = new Curso(nombreCurso, cantAlumnos, materia, escuela, idDelDocente);
+                cursoArrayList.add(curso);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if(connection != null) connection.close();
+                if(statement != null) statement.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return cursoArrayList;
     }
 
     @Override
@@ -79,12 +115,13 @@ public class CursoModelo extends General implements Modelos<Curso>
         try {
             connection = DriverManager.getConnection(dbURL, username, password);
             statement = connection.createStatement();
-            String sql = "INSERT INTO cursos(nombre, cantAlumnos, escuela, materia) " +
+            String sql = "INSERT INTO cursos(nombre, cantAlumnos, escuela, materia, docenteID) " +
                     "VALUES ('" +
-                    curso.getNombre().replace("'", "''") + "', '" +
-                    curso.getCantidadAlumnos() + "', '" +
+                    curso.getNombre().replace("'", "''") + "', " +
+                    curso.getCantidadAlumnos() + ", '" +
                     curso.getEscuela().replace("'", "''") + "', '" +
-                    curso.getMateria().replace("'", "''") + "')";
+                    curso.getMateria().replace("'", "''") + "', " +
+                    curso.getDocenteID() + ")";
             statement.executeUpdate(sql);
             System.out.println("Curso nuevo creado con éxito!!");
         }catch (SQLException e){

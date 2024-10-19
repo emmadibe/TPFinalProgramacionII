@@ -9,6 +9,7 @@ import java.sql.*;
 public class DocenteModelo extends General implements Modelos<Docente>
 {
 
+
     public void crearTablaBDD()
     {
         Connection connection = null;

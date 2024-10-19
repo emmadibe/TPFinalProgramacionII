@@ -11,8 +11,7 @@ public class DocenteControlador implements Controladores<Docente>
     DocenteModelo docenteModelo = new DocenteModelo();
     public void crear()
     {
-        DocenteControlador docenteControlador  = new DocenteControlador();
-        if(!docenteControlador.existeTabla()){ //Si no existe una tabla llamada docentes, crea una.
+        if(!this.existeTabla()){ //Si no existe una tabla llamada docentes, crea una.
             docenteModelo.crearTablaBDD();
         }
         Docente docente = new Docente();
@@ -23,6 +22,11 @@ public class DocenteControlador implements Controladores<Docente>
     public boolean existeTabla()
     {
         return General.existeTabla("docentes");
+    }
+
+    @Override
+    public void traer() {//PARA TRAERME TODOS LOS DOCENTES SI EL DOCENTE ES ADMIN.
+
     }
 
     public  Docente existe()

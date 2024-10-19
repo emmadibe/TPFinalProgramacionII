@@ -19,6 +19,14 @@ public class Curso implements Entidades<Curso>
     {
 
     }
+    public Curso(String nombre, int cantidadAlumnos, String materia, String escuela, int docenteID)
+    {
+        this.setNombre(nombre);
+        this.setCantidadAlumnos(cantidadAlumnos);
+        this.setMateria(materia);
+        this.setEscuela(escuela);
+        this.setDocenteID(docenteID);
+    }
     public Curso(String nombre, int cantidadAlumnos, String materia, String escuela)
     {
         this.setNombre(nombre);
@@ -51,7 +59,14 @@ public class Curso implements Entidades<Curso>
     @Override
     public void imprimirUnaInstancia()
     {
-
+        System.out.println("------------------------------------");
+        System.out.println("ID: " + this.getId());
+        System.out.println("Escuela: " + this.getEscuela());
+        System.out.println("Nombre del curso: " + this.getNombre());
+        System.out.println("Materia: " + this.getMateria());
+        System.out.println("Cantidad de alumnos: " + this.getCantidadAlumnos());
+        System.out.println("ID del docente: " + this.getDocenteID());
+        System.out.println("------------------------------------");
     }
 
     public String getNombre() {

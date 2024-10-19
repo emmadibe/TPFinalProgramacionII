@@ -9,5 +9,6 @@ public interface Controladores<T>
     public T existe();
     public void eliminar(T t);
     public void editar(T t);
+    public void traer();
 
 }
