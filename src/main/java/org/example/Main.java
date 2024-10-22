@@ -4,6 +4,7 @@ import Controlador.DocenteControlador;
 import Modelos.CursoModelo;
 import Modelos.EstudiantesModelo;
 import Modelos.General;
+import Modelos.TablaIntermediaEstudiantexCurso;
 import Vistas.MenuDocente;
 import clasesGenerales.Curso;
 import clasesGenerales.Docente;
@@ -19,7 +20,8 @@ public class Main
     public static void main(String[] args)
     {
         ConexionTPFinal.getConnection();
-
+        TablaIntermediaEstudiantexCurso tablaIntermediaEstudiantexCurso = new TablaIntermediaEstudiantexCurso();
+        tablaIntermediaEstudiantexCurso.crearTablaIntermedia();
         int opcion;
         do{
             Main.opcionesMenuLogueo();

@@ -9,11 +9,19 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
+<!--Dentro de esta etiqueta pongo todas las dependencias. Una de ellas, es para usar la base de datos; otra, la segunda, es para poder utilizar la excepción PersistenceExeption que es cuando el usuario quiere ingresar un valor repetido en un campo de la BDD con la restricción UNIQUE.-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.17</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.6.0.Final</version> <!-- Asegúrate de usar la versión que necesites -->
+        </dependency>
+
     </dependencies>
 
     <properties>

@@ -24,6 +24,7 @@ public class Estudiante extends Persona implements Entidades<Estudiante>
 
     @Override
     public Estudiante crearInstancia() {
+        ingresar.nextLine();
         System.out.println("DNI ");
         String dni = ingresar.nextLine();
         System.out.println("Nombre: ");

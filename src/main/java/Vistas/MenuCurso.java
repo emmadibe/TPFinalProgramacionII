@@ -1,6 +1,8 @@
 package Vistas;
 
+import Controlador.EstudianteControlador;
 import clasesGenerales.Curso;
+import clasesGenerales.Estudiante;
 
 import java.util.Scanner;
 
@@ -13,15 +15,18 @@ public class MenuCurso
         do{
             MenuCurso.opcionesCurso(curso);
             opcion = ingresar.nextInt();
+            MenuCurso.menuPrincipalCurso(opcion, curso);
         }while(opcion != 0);
     }
 
     public static void menuPrincipalCurso(int opcion, Curso curso)
     {
+        EstudianteControlador estudianteControlador = new EstudianteControlador(curso.getId());
         switch (opcion){
             case 1:
                 break;
             case 2:
+                estudianteControlador.crear();
                 break;
             default:
                 System.out.println("Opcion no valida.");

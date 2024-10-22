@@ -3,13 +3,12 @@ package Modelos;
 
 import clasesGenerales.Estudiante;
 import interfaces.Modelos;
-
+import org.hibernate.exception.ConstraintViolationException;
 import java.sql.*;
 
 public class EstudiantesModelo extends General implements Modelos<Estudiante>
 {
-    public void crearTablaBDD()
-    {
+    public void crearTablaBDD() {
         Connection connection = null;
         Statement statement = null;
 
@@ -22,7 +21,7 @@ public class EstudiantesModelo extends General implements Modelos<Estudiante>
                     "id INT AUTO_INCREMENT PRIMARY KEY, " +
                     "nombre VARCHAR(100), " +
                     "apellido VARCHAR(100)," +
-                    "DNI VARCHAR(100)," +
+                    "DNI VARCHAR(100) UNIQUE," + //Para poder identificar que el estudiante no sea repetido.
                     "edad INT)";
 
 
@@ -32,7 +31,9 @@ public class EstudiantesModelo extends General implements Modelos<Estudiante>
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } finally {
+        }catch (ConstraintViolationException e){ //Excepción por si el usuario ingresa un valor repetido en un campo con la constrcciion UNIQUE. DNI tiene esa constriccion.
+            System.out.println("Ya existe un usuario con ese DNI.");
+        }finally {
             try {
                 if (statement != null) statement.close();
                 if (connection != null) connection.close();
