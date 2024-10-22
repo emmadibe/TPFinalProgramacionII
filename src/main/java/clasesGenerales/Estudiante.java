@@ -53,7 +53,6 @@ public class Estudiante extends Persona implements Entidades<Estudiante>
         System.out.println("Nombre: " + this.getNombre());
         System.out.println("Apellido: " + this.getApellido());
         System.out.println("Edad: " + this.getEdad());
-        System.out.println("Curso: " + this.curso.getNombre());
         System.out.println("Promedio: " + this.calcularPromedio());
         System.out.println("-----------------------------------");
 
