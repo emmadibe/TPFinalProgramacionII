@@ -2,6 +2,8 @@ package clasesGenerales;
 
 import interfaces.Entidades;
 
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Estudiante extends Persona implements Entidades<Estudiante>
@@ -10,6 +12,8 @@ public class Estudiante extends Persona implements Entidades<Estudiante>
     private int docenteId;
     private int cursoId;
     private String grado;
+    private ArrayList <Examen> examenes;
+
     public Estudiante()
     {
 
@@ -44,7 +48,46 @@ public class Estudiante extends Persona implements Entidades<Estudiante>
 
     @Override
     public void imprimirUnaInstancia() {
+        System.out.println("-----------------------------------");
+        System.out.println("ID: " + this.getId());
+        System.out.println("Nombre: " + this.getNombre());
+        System.out.println("Apellido: " + this.getApellido());
+        System.out.println("Edad: " + this.getEdad());
+        System.out.println("Curso: " + this.curso.getNombre());
+        System.out.println("Promedio: " + this.calcularPromedio());
+        System.out.println("-----------------------------------");
 
+    }
+    public void actualizarAtributosPorTeclado() {
+        System.out.println("Actualizar Atributos del Estudiante:");
+
+        System.out.print("Nuevo Nombre:");
+        String nuevoNombre = ingresar.nextLine();
+        this.setNombre(nuevoNombre);
+
+        System.out.print("Nuevo Apellido:");
+        String nuevoApellido = ingresar.nextLine();
+        this.setApellido(nuevoApellido);
+
+        System.out.print("Nueva Edad: ");
+        int nuevaEdad = ingresar.nextInt();
+        ingresar.nextLine();
+        this.setEdad(nuevaEdad);
+
+        System.out.println("Atributos actualizados correctamente.");
+    }
+
+    public double calcularPromedio() {
+        double promedio = 0.0;
+        if (examenes.isEmpty()) {
+            promedio = 0.0;
+        } else {
+            double suma = 0;
+            for (Examen examen : examenes) {
+                suma += examen.getNota();
+            }
+            promedio =  suma / examenes.size();
+        }
     }
 
     public int getDocenteId() {
