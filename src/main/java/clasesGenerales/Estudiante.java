@@ -87,6 +87,7 @@ public class Estudiante extends Persona implements Entidades<Estudiante>
             }
             promedio =  suma / examenes.size();
         }
+        return promedio;
     }
 
     public int getDocenteId() {
