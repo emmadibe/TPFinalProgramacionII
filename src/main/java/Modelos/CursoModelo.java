@@ -58,7 +58,7 @@ public class CursoModelo extends General implements Modelos<Curso>
                 int cantAlumnos = resultSet.getInt("cantAlumnos");
                 int id = resultSet.getInt("id");
                 int idDelDocente = resultSet.getInt("docenteID");
-                Curso curso = new Curso(nombreCurso, cantAlumnos, materia, escuela, idDelDocente);
+                Curso curso = new Curso(nombreCurso, cantAlumnos, materia, escuela, idDelDocente, id);
                 cursoArrayList.add(curso);
             }
         }catch (SQLException e){

@@ -27,6 +27,15 @@ public class Curso implements Entidades<Curso>
         this.setEscuela(escuela);
         this.setDocenteID(docenteID);
     }
+    public Curso(String nombre, int cantidadAlumnos, String materia, String escuela, int docenteID, int id) //Constructor que uso para traerme los registros de cursos de mi BDD
+    {
+        this.setNombre(nombre);
+        this.setCantidadAlumnos(cantidadAlumnos);
+        this.setMateria(materia);
+        this.setEscuela(escuela);
+        this.setDocenteID(docenteID);
+        this.setId(id);
+    }
     public Curso(String nombre, int cantidadAlumnos, String materia, String escuela)
     {
         this.setNombre(nombre);

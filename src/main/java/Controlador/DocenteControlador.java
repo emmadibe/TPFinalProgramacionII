@@ -25,8 +25,8 @@ public class DocenteControlador implements Controladores<Docente>
     }
 
     @Override
-    public void traer() {//PARA TRAERME TODOS LOS DOCENTES SI EL DOCENTE ES ADMIN.
-
+    public Docente traer() {//PARA TRAERME TODOS LOS DOCENTES SI EL DOCENTE ES ADMIN.
+        return null;
     }
 
     public  Docente existe()

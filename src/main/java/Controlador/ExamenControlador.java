@@ -5,14 +5,15 @@ import interfaces.Controladores;
 
 public class ExamenControlador implements Controladores<Examen>
 {
+
     @Override
     public void crear() {
 
     }
 
     @Override
-    public void traer() {
-
+    public Examen traer() {
+        return null;
     }
 
     @Override

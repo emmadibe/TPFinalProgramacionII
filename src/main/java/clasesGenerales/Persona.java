@@ -5,6 +5,7 @@ public abstract class Persona
     protected int id;
     protected String nombre;
     protected String apellido;
+    protected String dni;
     protected int edad;
 
     public String getNombre() {
@@ -37,5 +38,13 @@ public abstract class Persona
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 }

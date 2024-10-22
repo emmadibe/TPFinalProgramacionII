@@ -2,10 +2,12 @@ package org.example;
 
 import Controlador.DocenteControlador;
 import Modelos.CursoModelo;
+import Modelos.EstudiantesModelo;
 import Modelos.General;
 import Vistas.MenuDocente;
 import clasesGenerales.Curso;
 import clasesGenerales.Docente;
+import clasesGenerales.Estudiante;
 import com.codeup.TPFinal.ConexionTPFinal;
 import java.util.Scanner;
 
@@ -17,6 +19,7 @@ public class Main
     public static void main(String[] args)
     {
         ConexionTPFinal.getConnection();
+
         int opcion;
         do{
             Main.opcionesMenuLogueo();

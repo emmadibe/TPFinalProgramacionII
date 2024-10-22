@@ -2,6 +2,8 @@ package Vistas;
 
 import Controlador.CursoControlador;
 import Controlador.DocenteControlador;
+import clasesGenerales.Curso;
+import clasesGenerales.CursoArrayList;
 import clasesGenerales.Docente;
 
 import javax.print.Doc;
@@ -29,6 +31,7 @@ public class MenuDocente
     {
         DocenteControlador docenteControlador = new DocenteControlador();
         CursoControlador cursoControlador = new CursoControlador(docente.getId());
+        CursoArrayList cursoArrayList = new CursoArrayList(100);
         switch (opcion){
             case 0:
                 System.out.println("Sesión cerrada.");
@@ -43,7 +46,12 @@ public class MenuDocente
                 cursoControlador.crear();
                 break;
             case 5: //Ver todos los cursos que posee el docente.
-                cursoControlador.traer();
+                cursoArrayList = cursoControlador.traer();
+                cursoArrayList.imprimirTodos();
+                break;
+            case 6://Entrar a un curso.
+                Curso curso = cursoControlador.existe();
+                MenuCurso.menuInicialCurso(curso);
                 break;
             default:
                 System.out.println("Opcion inválida.");
@@ -61,5 +69,7 @@ public class MenuDocente
         System.out.println("3)Eliminar mi usuario.");
         System.out.println("4)Crear un nuevo curso.");
         System.out.println("5)Ver mis cursos");
+        System.out.println("6)Entrar a un curso.");
+
     }
 }
