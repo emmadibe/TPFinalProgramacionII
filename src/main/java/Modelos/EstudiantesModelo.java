@@ -31,8 +31,6 @@ public class EstudiantesModelo extends General implements Modelos<Estudiante>
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }catch (ConstraintViolationException e){ //Excepción por si el usuario ingresa un valor repetido en un campo con la constrcciion UNIQUE. DNI tiene esa constriccion.
-            System.out.println("Ya existe un usuario con ese DNI.");
         }finally {
             try {
                 if (statement != null) statement.close();
@@ -72,6 +70,8 @@ public class EstudiantesModelo extends General implements Modelos<Estudiante>
             System.out.println("Estudiante nuevo creado con éxito");
         }catch (SQLException e){
             System.out.println("No se pudo crear al estudiante");
+        }catch (ConstraintViolationException e){ //Excepción por si el usuario ingresa un valor repetido en un campo con la constrcciion UNIQUE. DNI tiene esa constriccion.
+            System.out.println("Ya existe un usuario con ese DNI.");
         }finally {
             try {
                 if(connection != null) connection.close();
