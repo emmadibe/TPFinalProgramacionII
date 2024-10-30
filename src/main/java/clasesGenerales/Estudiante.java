@@ -10,6 +10,10 @@ public class Estudiante extends Persona implements Entidades<Estudiante>
     private int docenteId;
     private int cursoId;
     private String grado;
+    private String dni;
+    private String nombre;
+    private String apellido;
+    private int edad;
     public Estudiante()
     {
 
@@ -35,6 +39,17 @@ public class Estudiante extends Persona implements Entidades<Estudiante>
         int edad = ingresar.nextInt();
         Estudiante estudiante = new Estudiante(dni, nombre, apellido, edad);
         return estudiante;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Estudiante{" +
+                "dni='" + this.getDni() + '\'' +
+                ", nombre='" + this.getNombre() + '\'' +
+                ", apellido='" + this.getApellido() + '\'' +
+                ", edad=" + this.getApellido() +
+                '}';
     }
 
     @Override

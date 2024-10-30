@@ -66,6 +66,18 @@ public class Curso implements Entidades<Curso>
     }
 
     @Override
+    public String toString() {
+        return "Curso{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", escuela='" + escuela + '\'' +
+                ", cantidadAlumnos=" + cantidadAlumnos +
+                ", materia='" + materia + '\'' +
+                ", docenteID=" + docenteID +
+                '}';
+    }
+
+    @Override
     public void imprimirUnaInstancia()
     {
         System.out.println("------------------------------------");

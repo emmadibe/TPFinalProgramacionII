@@ -3,6 +3,8 @@ package Controlador;
 import Modelos.DocenteModelo;
 import Modelos.General;
 import Vistas.DocenteVistas;
+import clasesGenerales.ArrayListParaTodos;
+import clasesGenerales.Curso;
 import clasesGenerales.Docente;
 import interfaces.Controladores;
 
@@ -25,7 +27,7 @@ public class DocenteControlador implements Controladores<Docente>
     }
 
     @Override
-    public Docente traer() {//PARA TRAERME TODOS LOS DOCENTES SI EL DOCENTE ES ADMIN.
+    public ArrayListParaTodos<Curso> traer() {//PARA TRAERME TODOS LOS DOCENTES SI EL DOCENTE ES ADMIN.
         return null;
     }
 

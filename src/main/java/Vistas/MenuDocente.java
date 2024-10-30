@@ -2,11 +2,10 @@ package Vistas;
 
 import Controlador.CursoControlador;
 import Controlador.DocenteControlador;
+import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Curso;
-import clasesGenerales.CursoArrayList;
 import clasesGenerales.Docente;
 
-import javax.print.Doc;
 import java.util.Scanner;
 
 public class MenuDocente
@@ -31,7 +30,7 @@ public class MenuDocente
     {
         DocenteControlador docenteControlador = new DocenteControlador();
         CursoControlador cursoControlador = new CursoControlador(docente.getId());
-        CursoArrayList cursoArrayList = new CursoArrayList(100);
+        ArrayListParaTodos<Curso> cursoArrayList = new ArrayListParaTodos<Curso>(100);
         switch (opcion){
             case 0:
                 System.out.println("Sesión cerrada.");

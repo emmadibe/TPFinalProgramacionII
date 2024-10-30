@@ -1,5 +1,7 @@
 package Controlador;
 
+import clasesGenerales.ArrayListParaTodos;
+import clasesGenerales.Curso;
 import clasesGenerales.Examen;
 import interfaces.Controladores;
 
@@ -12,7 +14,7 @@ public class ExamenControlador implements Controladores<Examen>
     }
 
     @Override
-    public Examen traer() {
+    public ArrayListParaTodos<Curso> traer() {
         return null;
     }
 

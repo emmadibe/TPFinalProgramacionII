@@ -1,10 +1,10 @@
 package org.example;
 
 import Controlador.DocenteControlador;
+import Controlador.TablaIntermediaEstudiantexCursoControlador;
 import Modelos.CursoModelo;
 import Modelos.EstudiantesModelo;
 import Modelos.General;
-import Modelos.TablaIntermediaEstudiantexCurso;
 import Vistas.MenuDocente;
 import clasesGenerales.Curso;
 import clasesGenerales.Docente;
@@ -20,8 +20,8 @@ public class Main
     public static void main(String[] args)
     {
         ConexionTPFinal.getConnection();
-        TablaIntermediaEstudiantexCurso tablaIntermediaEstudiantexCurso = new TablaIntermediaEstudiantexCurso();
-        tablaIntermediaEstudiantexCurso.crearTablaIntermedia();
+        EstudiantesModelo estudiantesModelo = new EstudiantesModelo();
+        System.out.println("IdMAX: " + estudiantesModelo.getIDULTIMOREGISTROBDD());
         int opcion;
         do{
             Main.opcionesMenuLogueo();

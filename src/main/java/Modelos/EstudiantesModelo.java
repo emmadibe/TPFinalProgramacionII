@@ -1,12 +1,13 @@
 
 package Modelos;
 
+import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Estudiante;
 import interfaces.Modelos;
 import org.hibernate.exception.ConstraintViolationException;
 import java.sql.*;
 
-public class EstudiantesModelo extends General implements Modelos<Estudiante>
+public class EstudiantesModelo extends General implements Modelos<Estudiante, ArrayListParaTodos, Integer>
 {
     public void crearTablaBDD() {
         Connection connection = null;
@@ -52,6 +53,42 @@ public class EstudiantesModelo extends General implements Modelos<Estudiante>
     }
 
     @Override
+    public ArrayListParaTodos<Estudiante> traerTodos(Integer idCurso) {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        ArrayListParaTodos<Estudiante> estudianteArrayListParaTodos = new ArrayListParaTodos<Estudiante>(100);
+        try {
+            connection = DriverManager.getConnection(dbURL, username, password);
+            statement = connection.createStatement();
+            String sql = "SELECT e.* " +
+                    "FROM estudiantes e " +
+                    "JOIN tablaintermediaestudiantesxcursos ec ON e.id = ec.estudianteID " +
+                    "WHERE ec.cursoID = " + idCurso + ";";
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                String nombre = resultSet.getString("nombre");
+                String apellido = resultSet.getString("apellido");
+                String dni = resultSet.getString("DNI");
+                int edad = resultSet.getInt("edad");
+                Estudiante estudiante = new Estudiante(dni, nombre, apellido, edad);
+                estudianteArrayListParaTodos.agregar(estudiante);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if(connection != null) connection.close();
+                if(statement != null) statement.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+
+        return estudianteArrayListParaTodos;
+    }
+
+    @Override
     public void agregarBDD(Estudiante estudiante)
     {
         Connection connection = null;
@@ -87,4 +124,30 @@ public class EstudiantesModelo extends General implements Modelos<Estudiante>
 
     }
 
+    public int getIDULTIMOREGISTROBDD()
+    {
+        Connection connection = null;
+        Statement statement = null;
+        int idEstudiante = -1;
+        try {
+            connection = DriverManager.getConnection(dbURL, username, password);
+            statement = connection.createStatement();
+            String sql = "SELECT MAX(id) AS ultimoID FROM estudiantes";
+            ResultSet resultSet = statement.executeQuery(sql);
+            if(resultSet.next()){
+                idEstudiante = resultSet.getInt("ultimoID");
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if(connection != null) connection.close();
+                if(statement != null) statement.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return idEstudiante;
+    }
 }

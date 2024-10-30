@@ -1,12 +1,12 @@
 package Modelos;
 
+import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Docente;
 import interfaces.Modelos;
 
-import javax.print.Doc;
 import java.sql.*;
 
-public class DocenteModelo extends General implements Modelos<Docente>
+public class DocenteModelo extends General implements Modelos<Docente, ArrayListParaTodos, Integer>
 {
 
 
@@ -75,6 +75,11 @@ public class DocenteModelo extends General implements Modelos<Docente>
             }
         }
 
+    }
+
+    @Override
+    public ArrayListParaTodos traerTodos(Integer integer) {
+        return null;
     }
 
     public static Docente buscar(String email, String pass)

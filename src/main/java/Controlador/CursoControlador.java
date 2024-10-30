@@ -3,14 +3,9 @@ package Controlador;
 import Modelos.CursoModelo;
 import Modelos.General;
 import Vistas.CursoVistas;
+import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Curso;
-import clasesGenerales.CursoArrayList;
-import clasesGenerales.Docente;
 import interfaces.Controladores;
-
-import java.awt.geom.RectangularShape;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class CursoControlador implements Controladores<Curso>
 {
@@ -41,9 +36,9 @@ public class CursoControlador implements Controladores<Curso>
     }
 
     @Override
-    public CursoArrayList traer() //PARA TRAERME TOS LOS CURSOS PERTENECIENTES AL DOCENTE.
+    public ArrayListParaTodos traer() //PARA TRAERME TOS LOS CURSOS PERTENECIENTES AL DOCENTE.
     {
-        CursoArrayList cursoArrayList = new CursoArrayList(100);
+        ArrayListParaTodos<Curso> cursoArrayList = new ArrayListParaTodos<Curso>(100);
         cursoArrayList = cursoModelo.traerTodos(this.getDocenteID());
         return cursoArrayList;
     }
@@ -53,7 +48,7 @@ public class CursoControlador implements Controladores<Curso>
     {
         Curso curso = null; //Si no existe el elemento en el arrayList o directamente el arrayList está vacío, retornará null.
         int idCursoABuscar = CursoVistas.buscarCursoVista(); //Pido el id del curso a buscar.
-        CursoArrayList cursoArrayList = new CursoArrayList(100);//Inicializo cursoArrayList con una dimensión inicial de 100
+        ArrayListParaTodos<Curso> cursoArrayList = new ArrayListParaTodos<Curso>(100);
         cursoArrayList = cursoModelo.traerTodos(this.getDocenteID()); //Me traigo todos los cursos de la bdd que pertenecen al docente y los guardo en un arrayList.
         if(!cursoArrayList.estaVacio()){ //Compruebo que el arrayListo no esté vacío.
             if(cursoArrayList.existeIdEnArrayList(idCursoABuscar)){//Compruebo que exista el id del curso a buscar

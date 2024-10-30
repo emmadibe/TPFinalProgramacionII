@@ -1,14 +1,12 @@
 package Modelos;
 
+import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Curso;
-import clasesGenerales.CursoArrayList;
-import clasesGenerales.Docente;
 import interfaces.Modelos;
 
 import java.sql.*;
-import java.text.CompactNumberFormat;
 
-public class CursoModelo extends General implements Modelos<Curso>
+public class CursoModelo extends General implements Modelos<Curso, ArrayListParaTodos, Integer>
 {
     public void crearTablaBDD()
     {
@@ -40,12 +38,12 @@ public class CursoModelo extends General implements Modelos<Curso>
         }
     }
 
-    public CursoArrayList traerTodos(int idDocente)
-    {
+    @Override
+    public ArrayListParaTodos<Curso> traerTodos(Integer idDocente) {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        CursoArrayList cursoArrayList = new CursoArrayList(100);
+        ArrayListParaTodos<Curso> cursoArrayList = new ArrayListParaTodos<>(100);
         try {
             connection = DriverManager.getConnection(dbURL, username, password);
             statement = connection.createStatement();
@@ -59,7 +57,7 @@ public class CursoModelo extends General implements Modelos<Curso>
                 int id = resultSet.getInt("id");
                 int idDelDocente = resultSet.getInt("docenteID");
                 Curso curso = new Curso(nombreCurso, cantAlumnos, materia, escuela, idDelDocente, id);
-                cursoArrayList.add(curso);
+                cursoArrayList.agregar(curso);
             }
         }catch (SQLException e){
             e.printStackTrace();

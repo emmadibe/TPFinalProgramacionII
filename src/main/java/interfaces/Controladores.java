@@ -1,6 +1,7 @@
 package interfaces;
 
-import clasesGenerales.Docente;
+import clasesGenerales.ArrayListParaTodos;
+import clasesGenerales.Curso;
 
 public interface Controladores<T>
 {
@@ -9,5 +10,5 @@ public interface Controladores<T>
     public T existe();
     public void eliminar(T t);
     public void editar(T t);
-    public T traer();
+    public ArrayListParaTodos traer();
 }
