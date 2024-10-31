@@ -7,7 +7,7 @@ import interfaces.Modelos;
 import org.hibernate.exception.ConstraintViolationException;
 import java.sql.*;
 
-public class EstudiantesModelo extends General implements Modelos<Estudiante, ArrayListParaTodos, Integer>
+public class EstudiantesModelo extends General implements Modelos<Estudiante>
 {
     public void crearTablaBDD() {
         Connection connection = null;

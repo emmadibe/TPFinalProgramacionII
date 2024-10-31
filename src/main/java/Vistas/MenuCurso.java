@@ -35,6 +35,8 @@ public class MenuCurso
                 estudianteArrayListParaTodos = estudianteControlador.traer();
                 estudianteArrayListParaTodos.imprimirTodos();
                 break;
+            case 4: //Agregar un examen al curso
+                break;
             default:
                 System.out.println("Opcion no valida.");
                 break;
@@ -49,5 +51,6 @@ public class MenuCurso
         System.out.println("1)Ver alumnos y notas del curso");
         System.out.println("2)Agregar un alumno");
         System.out.println("3)Ver todos los alumnos");
+        System.out.println("4)Agregar un examen al curso");
     }
 }

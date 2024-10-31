@@ -6,7 +6,7 @@ import interfaces.Modelos;
 
 import java.sql.*;
 
-public class CursoModelo extends General implements Modelos<Curso, ArrayListParaTodos, Integer>
+public class CursoModelo extends General implements Modelos<Curso>
 {
     public void crearTablaBDD()
     {

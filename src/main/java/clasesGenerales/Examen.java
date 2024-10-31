@@ -1,13 +1,47 @@
 package clasesGenerales;
 
-public class Examen
+import interfaces.Entidades;
+
+import java.util.Scanner;
+
+public class Examen implements Entidades<Examen>
 {
     private String nombre;
-    private int nota;
-    private int estudianteID;
     private int cursoID;
+    private int numeroDeExamen;
 
-    public Examen() {
+    public static final Scanner ingresar = new Scanner(System.in);
+    public Examen(){}
+
+    public Examen(String nombre, int numeroDeExamen, int cursoID)
+    {
+        this.setNombre(nombre);
+        this.setNumeroDeExamen(numeroDeExamen);
+        this.setCursoID(cursoID);
+    }
+    public Examen(String nombre, int numeroDeExamen)
+    {
+        this.setNombre(nombre);
+        this.setNumeroDeExamen(numeroDeExamen);
+    }
+
+    @Override
+    public Examen crearInstancia()
+    {
+        System.out.println("Nombre del examen: ");
+        String nombre = ingresar.nextLine();
+        System.out.println("Numero del examen: ");
+        int numeroExamen = ingresar.nextInt();
+        return new Examen(nombre, numeroExamen);
+    }
+
+    @Override
+    public void imprimirUnaInstancia() {
+
+    }
+
+    @Override
+    public void actualizarSeteo(Examen examen) {
 
     }
 
@@ -15,6 +49,9 @@ public class Examen
         return nombre;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public int getCursoID() {
         return cursoID;
@@ -24,23 +61,11 @@ public class Examen
         this.cursoID = cursoID;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public int getNumeroDeExamen() {
+        return numeroDeExamen;
     }
 
-    public int getNota() {
-        return nota;
-    }
-
-    public void setNota(int nota) {
-        this.nota = nota;
-    }
-
-    public int getEstudianteID() {
-        return estudianteID;
-    }
-
-    public void setEstudianteID(int estudianteID) {
-        this.estudianteID = estudianteID;
+    public void setNumeroDeExamen(int numeroDeExamen) {
+        this.numeroDeExamen = numeroDeExamen;
     }
 }

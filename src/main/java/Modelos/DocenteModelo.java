@@ -6,7 +6,7 @@ import interfaces.Modelos;
 
 import java.sql.*;
 
-public class DocenteModelo extends General implements Modelos<Docente, ArrayListParaTodos, Integer>
+public class DocenteModelo extends General implements Modelos<Docente>
 {
 
 
