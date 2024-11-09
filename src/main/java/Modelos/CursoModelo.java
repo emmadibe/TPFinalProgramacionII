@@ -38,6 +38,7 @@ public class CursoModelo extends General implements Modelos<Curso>
         }
     }
 
+
     @Override
     public ArrayListParaTodos<Curso> traerTodos(Integer idDocente) {
         Connection connection = null;

@@ -28,6 +28,7 @@ public class Examen implements Entidades<Examen>
     @Override
     public Examen crearInstancia()
     {
+        ingresar.nextLine();
         System.out.println("Nombre del examen: ");
         String nombre = ingresar.nextLine();
         System.out.println("Numero del examen: ");

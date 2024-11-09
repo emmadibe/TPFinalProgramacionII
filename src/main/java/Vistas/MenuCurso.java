@@ -1,6 +1,7 @@
 package Vistas;
 
 import Controlador.EstudianteControlador;
+import Controlador.ExamenControlador;
 import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Curso;
 import clasesGenerales.Estudiante;
@@ -24,7 +25,7 @@ public class MenuCurso
     {
         EstudianteControlador estudianteControlador = new EstudianteControlador(curso.getId());
         ArrayListParaTodos<Estudiante> estudianteArrayListParaTodos = new ArrayListParaTodos<Estudiante>(200);
-
+        ExamenControlador examenControlador = new ExamenControlador(curso.getId());
         switch (opcion){
             case 1:
                 break;
@@ -35,7 +36,8 @@ public class MenuCurso
                 estudianteArrayListParaTodos = estudianteControlador.traer();
                 estudianteArrayListParaTodos.imprimirTodos();
                 break;
-            case 4: //Agregar un examen al curso
+            case 4: //Agregar un examen al
+                examenControlador.crear();
                 break;
             default:
                 System.out.println("Opcion no valida.");
@@ -51,6 +53,7 @@ public class MenuCurso
         System.out.println("1)Ver alumnos y notas del curso");
         System.out.println("2)Agregar un alumno");
         System.out.println("3)Ver todos los alumnos");
-        System.out.println("4)Agregar un examen al curso");
+        System.out.println("4)Crear un examen nuevo");
+        System.out.println("5)Ir a un examen del curso");
     }
 }

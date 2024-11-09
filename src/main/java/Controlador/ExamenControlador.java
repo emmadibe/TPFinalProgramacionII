@@ -1,5 +1,6 @@
 package Controlador;
 
+import Excepciones.ValorRepetidoException;
 import Modelos.ExamenesModelo;
 import Modelos.General;
 import clasesGenerales.ArrayListParaTodos;
@@ -26,12 +27,28 @@ public class ExamenControlador implements Controladores<Examen>
         }
         examen = examen.crearInstancia();
         examen.setCursoID(this.cursoID);
-        examenesModelo.agregarBDD(examen);
+        try {
+            this.existeRegistro(examen);
+            examenesModelo.agregarBDD(examen);
+        }catch (ValorRepetidoException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public ArrayListParaTodos<Curso> traer() {
         return null;
+    }
+
+    public boolean existeRegistro(Examen examen) throws ValorRepetidoException
+    {
+        ExamenesModelo examenesModelo = new ExamenesModelo();
+        Boolean existe = examenesModelo.existeRegistroBDD(examen);
+        if(!existe){
+            return false;
+        }else{
+            throw new ValorRepetidoException("Ya existe un examen con ese nombre en el curso " + examen.getCursoID());
+        }
     }
 
     @Override
