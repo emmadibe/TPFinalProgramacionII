@@ -2,9 +2,11 @@ package Vistas;
 
 import Controlador.EstudianteControlador;
 import Controlador.ExamenControlador;
+import Excepciones.NuloException;
 import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Curso;
 import clasesGenerales.Estudiante;
+import clasesGenerales.Examen;
 
 import java.util.Scanner;
 
@@ -36,8 +38,12 @@ public class MenuCurso
                 estudianteArrayListParaTodos = estudianteControlador.traer();
                 estudianteArrayListParaTodos.imprimirTodos();
                 break;
-            case 4: //Agregar un examen al
+            case 4: //Agregar un examen al curso
                 examenControlador.crear();
+                break;
+            case 5: //Entrar a un examen.
+                Examen examen = examenControlador.existe();
+                System.out.println(examen);
                 break;
             default:
                 System.out.println("Opcion no valida.");
@@ -48,7 +54,11 @@ public class MenuCurso
     public static void opcionesCurso(Curso curso)
     {
         System.out.println("Estas en el curso: ");
-        curso.imprimirUnaInstancia();
+        try {
+            curso.imprimirUnaInstancia();
+        }catch (NuloException e){
+            e.printStackTrace();
+        }
         System.out.println("¿Qué deseas hacer?");
         System.out.println("1)Ver alumnos y notas del curso");
         System.out.println("2)Agregar un alumno");

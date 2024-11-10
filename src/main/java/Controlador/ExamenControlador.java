@@ -1,8 +1,10 @@
 package Controlador;
 
+import Excepciones.NoExisteIdException;
 import Excepciones.ValorRepetidoException;
 import Modelos.ExamenesModelo;
 import Modelos.General;
+import Vistas.ExamenVistas;
 import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Curso;
 import clasesGenerales.Examen;
@@ -13,6 +15,8 @@ public class ExamenControlador implements Controladores<Examen>
     private int cursoID;
 
     public ExamenControlador(){}
+    public ExamenVistas examenVistas = new ExamenVistas();
+    ExamenesModelo examenesModelo = new ExamenesModelo();
     public ExamenControlador(int cursoID)
     {
         this.setCursoID(cursoID);
@@ -54,7 +58,20 @@ public class ExamenControlador implements Controladores<Examen>
     @Override
     public Examen existe()
     {
-        return null;
+        Examen examen = null; //Si no exste el elemento en el arrayList o direcatemente el arrayList está vacío, retornará null.
+        int idExamen = examenVistas.buscarExamenVista();
+        ArrayListParaTodos<Examen> arrayListExamen = new ArrayListParaTodos<Examen>(100);
+        arrayListExamen = examenesModelo.traerTodos(this.getCursoID());
+        if(!arrayListExamen.estaVacio()) {
+            try {
+                arrayListExamen.existeIdEnArrayList(idExamen); //Compruebo que exista el id. De no existir, me tira la excepción creada por mi llamada NoExisteIdException.
+                int posicion = arrayListExamen.traerPosicionDelElementoEnElArrayListPorId(idExamen);
+                examen = arrayListExamen.traerElementoPorPosicion(posicion);
+            } catch (NoExisteIdException e) {
+                e.printStackTrace();
+            }
+        }
+        return examen;
     }
 
     @Override

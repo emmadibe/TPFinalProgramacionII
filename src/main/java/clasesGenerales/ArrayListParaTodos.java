@@ -1,5 +1,7 @@
 package clasesGenerales;
 
+import Excepciones.NoExisteIdException;
+
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -32,7 +34,8 @@ public class ArrayListParaTodos<T>
         return this.arrayList.isEmpty();
     }
 
-    public boolean existeIdEnArrayList(int idBuscado) { //Este método va a buscar en el ArrayList genérico si existe una instancia de la clase T que tenga en su atributo id el entero que le paso por parámetro. De encontrarlo, retorna true; sino, false.
+    public boolean existeIdEnArrayList(int idBuscado) throws NoExisteIdException
+    { //Este método va a buscar en el ArrayList genérico si existe una instancia de la clase T que tenga en su atributo id el entero que le paso por parámetro. De encontrarlo, retorna true; sino, false.
         for (T t : this.arrayList) { //Este es un bucle for each.
             try {
                 Field campoId = t.getClass().getDeclaredField("id"); //La clase Field en Java es una parte del paquete de java.lang.reflect. Me otorga métodos para acceder y manipular los campos de una clase.
@@ -46,7 +49,7 @@ public class ArrayListParaTodos<T>
                 e.printStackTrace();
             }
         }
-        return false; // No se encontró el ID buscado
+        throw new NoExisteIdException("No existe un examen con ese número de ID."); // No se encontró el ID buscado
     }
 
     public int traerPosicionDelElementoEnElArrayListPorId(int idBuscado) {

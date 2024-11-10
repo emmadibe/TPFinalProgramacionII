@@ -6,6 +6,7 @@ import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Curso;
 import clasesGenerales.Docente;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class MenuDocente
@@ -50,7 +51,11 @@ public class MenuDocente
                 break;
             case 6://Entrar a un curso.
                 Curso curso = cursoControlador.existe();
-                MenuCurso.menuInicialCurso(curso);
+                if(!Objects.isNull(curso)){
+                    MenuCurso.menuInicialCurso(curso);
+                }else{
+                    System.out.println("No existe el curso.");
+                }
                 break;
             default:
                 System.out.println("Opcion inválida.");

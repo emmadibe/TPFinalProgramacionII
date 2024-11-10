@@ -56,9 +56,13 @@ public class Estudiante extends Persona implements Entidades<Estudiante>
     public void actualizarSeteo(Estudiante estudiante) {
 
     }
-
+    public boolean esNullo()
+    {
+        return false;
+    }
     @Override
-    public void imprimirUnaInstancia() {
+    public void imprimirUnaInstancia()
+    {
 
     }
 

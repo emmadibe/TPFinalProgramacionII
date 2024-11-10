@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Examen implements Entidades<Examen>
 {
+    private int id;
     private String nombre;
     private int cursoID;
     private int numeroDeExamen;
@@ -24,6 +25,13 @@ public class Examen implements Entidades<Examen>
         this.setNombre(nombre);
         this.setNumeroDeExamen(numeroDeExamen);
     }
+    public Examen(int id, int cursoID, String nombre, int numeroExamen)
+    {
+        this.setId(id);
+        this.setCursoID(cursoID);
+        this.setNombre(nombre);
+        this.setNumeroDeExamen(numeroExamen);
+    }
 
     @Override
     public Examen crearInstancia()
@@ -41,6 +49,19 @@ public class Examen implements Entidades<Examen>
 
     }
 
+    @Override
+    public String toString() {
+        return "Examen{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", cursoID=" + cursoID +
+                ", numeroDeExamen=" + numeroDeExamen +
+                '}';
+    }
+    public boolean esNullo()
+    {
+        return false;
+    }
     @Override
     public void actualizarSeteo(Examen examen) {
 
@@ -68,5 +89,13 @@ public class Examen implements Entidades<Examen>
 
     public void setNumeroDeExamen(int numeroDeExamen) {
         this.numeroDeExamen = numeroDeExamen;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

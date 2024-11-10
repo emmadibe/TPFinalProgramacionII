@@ -69,7 +69,10 @@ public class Docente extends Persona implements Entidades<Docente>
         this.setPassword(docenteNuevosDatos.getPassword());
         this.setRamaDocente(docenteNuevosDatos.getRamaDocente());
     }
-
+    public boolean esNullo()
+    {
+        return false;
+    }
     public void imprimirUnaInstancia()
     {
         System.out.println("-----------------------------------");

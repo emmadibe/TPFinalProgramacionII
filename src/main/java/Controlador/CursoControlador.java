@@ -1,5 +1,6 @@
 package Controlador;
 
+import Excepciones.NoExisteIdException;
 import Modelos.CursoModelo;
 import Modelos.General;
 import Vistas.CursoVistas;
@@ -50,10 +51,13 @@ public class CursoControlador implements Controladores<Curso>
         int idCursoABuscar = CursoVistas.buscarCursoVista(); //Pido el id del curso a buscar.
         ArrayListParaTodos<Curso> cursoArrayList = new ArrayListParaTodos<Curso>(100);
         cursoArrayList = cursoModelo.traerTodos(this.getDocenteID()); //Me traigo todos los cursos de la bdd que pertenecen al docente y los guardo en un arrayList.
-        if(!cursoArrayList.estaVacio()){ //Compruebo que el arrayListo no esté vacío.
-            if(cursoArrayList.existeIdEnArrayList(idCursoABuscar)){//Compruebo que exista el id del curso a buscar
+        if(!cursoArrayList.estaVacio()){
+            try {
+                cursoArrayList.existeIdEnArrayList(idCursoABuscar);
                 int posicion = cursoArrayList.traerPosicionDelElementoEnElArrayListPorId(idCursoABuscar);
                 curso = cursoArrayList.traerElementoPorPosicion(posicion);
+            }catch (NoExisteIdException e){
+                e.printStackTrace();
             }
         }
         return curso;

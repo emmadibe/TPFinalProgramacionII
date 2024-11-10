@@ -1,7 +1,9 @@
 package clasesGenerales;
 
+import Excepciones.NuloException;
 import interfaces.Entidades;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Curso implements Entidades<Curso>
@@ -78,16 +80,31 @@ public class Curso implements Entidades<Curso>
     }
 
     @Override
-    public void imprimirUnaInstancia()
+    public void imprimirUnaInstancia() throws NuloException
     {
-        System.out.println("------------------------------------");
-        System.out.println("ID: " + this.getId());
-        System.out.println("Escuela: " + this.getEscuela());
-        System.out.println("Nombre del curso: " + this.getNombre());
-        System.out.println("Materia: " + this.getMateria());
-        System.out.println("Cantidad de alumnos: " + this.getCantidadAlumnos());
-        System.out.println("ID del docente: " + this.getDocenteID());
-        System.out.println("------------------------------------");
+        if(!this.esNullo()){
+            System.out.println("------------------------------------");
+            System.out.println("ID: " + this.getId());
+            System.out.println("Escuela: " + this.getEscuela());
+            System.out.println("Nombre del curso: " + this.getNombre());
+            System.out.println("Materia: " + this.getMateria());
+            System.out.println("Cantidad de alumnos: " + this.getCantidadAlumnos());
+            System.out.println("ID del docente: " + this.getDocenteID());
+            System.out.println("------------------------------------");
+        }else{
+            throw new  NuloException("No existe el objeto con el id ingresado");
+        }
+    }
+
+    @Override
+    public boolean esNullo() {
+        boolean valor = false;
+        if ( this.getEscuela() == null ||
+                this.getNombre() == null || this.getMateria() == null) {
+
+            valor = true;
+        }
+        return valor;
     }
 
     public String getNombre() {
