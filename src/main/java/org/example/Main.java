@@ -2,15 +2,14 @@ package org.example;
 
 import Controlador.DocenteControlador;
 import Controlador.ExamenControlador;
+import Controlador.TablaIntermediaEstudiantesXExamenControlador;
 import Controlador.TablaIntermediaEstudiantexCursoControlador;
-import Modelos.CursoModelo;
-import Modelos.EstudiantesModelo;
-import Modelos.ExamenesModelo;
-import Modelos.General;
+import Modelos.*;
 import Vistas.MenuDocente;
 import clasesGenerales.Curso;
 import clasesGenerales.Docente;
 import clasesGenerales.Estudiante;
+import clasesGenerales.TablaIntermediaEstudiantesXExamen;
 import com.codeup.TPFinal.ConexionTPFinal;
 import java.util.Scanner;
 
@@ -45,7 +44,8 @@ public class Main
             case 1:
                 Docente docente = docenteControlador.existe();
                 if(docente!= null){
-                    MenuDocente.menuInicialDocentes(docente);
+                    MenuDocente menuDocente = new MenuDocente();
+                    menuDocente.menuInicial(docente);
                 }else{
                     System.out.println("Usuario y/o contrasenia incorrectos.");
                 }

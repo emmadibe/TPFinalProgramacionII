@@ -5,29 +5,30 @@ import Controlador.DocenteControlador;
 import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Curso;
 import clasesGenerales.Docente;
+import interfaces.Menus;
 
 import java.util.Objects;
 import java.util.Scanner;
 
-public class MenuDocente
+public class MenuDocente implements Menus<Docente>
 {
     public static final Scanner ingresar = new Scanner(System.in);
-    public static void menuInicialDocentes(Docente docente)
+    public void menuInicial(Docente docente)
     {
         int opcion;
         do {
-            MenuDocente.opcionesMenuInicialDocente(docente);
+            this.opciones(docente);
             opcion = ingresar.nextInt();
             if(opcion == 3){
                 DocenteControlador docenteControlador = new DocenteControlador();
                 docenteControlador.eliminar(docente);
                 opcion = 0;
             }
-            MenuDocente.menuPrincipalDocente(opcion, docente);
+            this.menuPrincipal(opcion, docente);
         }while (opcion != 0);
     }
 
-    public static void menuPrincipalDocente(int opcion, Docente docente)
+    public void menuPrincipal(int opcion, Docente docente)
     {
         DocenteControlador docenteControlador = new DocenteControlador();
         CursoControlador cursoControlador = new CursoControlador(docente.getId());
@@ -52,7 +53,8 @@ public class MenuDocente
             case 6://Entrar a un curso.
                 Curso curso = cursoControlador.existe();
                 if(!Objects.isNull(curso)){
-                    MenuCurso.menuInicialCurso(curso);
+                    MenuCurso menuCurso = new MenuCurso();
+                    menuCurso.menuInicial(curso);
                 }else{
                     System.out.println("No existe el curso.");
                 }
@@ -63,7 +65,7 @@ public class MenuDocente
         }
     }
 
-    public static void opcionesMenuInicialDocente(Docente docente)
+    public void opciones(Docente docente)
     {
         System.out.println("Hola, " + docente.getNombre() + " " + docente.getApellido() + ".");
         System.out.println("¿Qué deseas hacer? ");

@@ -45,7 +45,14 @@ public class Examen implements Entidades<Examen>
     }
 
     @Override
-    public void imprimirUnaInstancia() {
+    public void imprimirUnaInstancia()
+    {
+        System.out.println("--------------------------");
+        System.out.println("ID: " + this.getId());
+        System.out.println("CursoID: " + this.getCursoID());
+        System.out.println("Nombre del examen: " + this.getNombre());
+        System.out.println("Numero del examen: " + this.getNumeroDeExamen());
+        System.out.println("----------------------------");
 
     }
 

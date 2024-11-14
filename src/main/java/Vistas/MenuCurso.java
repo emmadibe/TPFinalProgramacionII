@@ -7,23 +7,25 @@ import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Curso;
 import clasesGenerales.Estudiante;
 import clasesGenerales.Examen;
+import interfaces.Menus;
 
+import java.util.Objects;
 import java.util.Scanner;
 
-public class MenuCurso
+public class MenuCurso implements Menus<Curso>
 {
     public static final Scanner ingresar = new Scanner(System.in);
-    public static void menuInicialCurso(Curso curso)
+    public void menuInicial(Curso curso)
     {
         int opcion;
         do{
-            MenuCurso.opcionesCurso(curso);
+            this.opciones(curso);
             opcion = ingresar.nextInt();
-            MenuCurso.menuPrincipalCurso(opcion, curso);
+            this.menuPrincipal(opcion, curso);
         }while(opcion != 0);
     }
 
-    public static void menuPrincipalCurso(int opcion, Curso curso)
+    public void menuPrincipal(int opcion, Curso curso)
     {
         EstudianteControlador estudianteControlador = new EstudianteControlador(curso.getId());
         ArrayListParaTodos<Estudiante> estudianteArrayListParaTodos = new ArrayListParaTodos<Estudiante>(200);
@@ -43,7 +45,12 @@ public class MenuCurso
                 break;
             case 5: //Entrar a un examen.
                 Examen examen = examenControlador.existe();
-                System.out.println(examen);
+                if(!Objects.isNull(examen)){
+                    MenuExamen menuExamen = new MenuExamen();
+                    menuExamen.menuInicial(examen);
+                }else{
+                    System.out.println("No existe un examen con ese id.");
+                }
                 break;
             default:
                 System.out.println("Opcion no valida.");
@@ -51,7 +58,7 @@ public class MenuCurso
         }
     }
 
-    public static void opcionesCurso(Curso curso)
+    public void opciones(Curso curso)
     {
         System.out.println("Estas en el curso: ");
         try {
