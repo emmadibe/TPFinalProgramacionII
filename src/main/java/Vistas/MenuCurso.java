@@ -2,6 +2,8 @@ package Vistas;
 
 import Controlador.EstudianteControlador;
 import Controlador.ExamenControlador;
+import Controlador.TablaIntermediaEstudiantesXExamenControlador;
+import Controlador.TablaIntermediaEstudiantexCursoControlador;
 import Excepciones.NuloException;
 import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Curso;
@@ -42,6 +44,9 @@ public class MenuCurso implements Menus<Curso>
                 break;
             case 4: //Agregar un examen al curso
                 examenControlador.crear();
+                int examenID = examenControlador.retornarUltimoid();
+                TablaIntermediaEstudiantesXExamenControlador tablaIntermediaEstudiantesXExamenControlador = new TablaIntermediaEstudiantesXExamenControlador(examenID, curso.getId());
+                tablaIntermediaEstudiantesXExamenControlador.crear();
                 break;
             case 5: //Entrar a un examen.
                 Examen examen = examenControlador.existe();

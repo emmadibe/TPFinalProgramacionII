@@ -10,6 +10,7 @@ import interfaces.Controladores;
 public class EstudianteControlador implements Controladores<Estudiante>
 {
     private int cursoID;
+    public EstudianteControlador(){}
     public EstudianteControlador(int cursoID)
     {
         this.setCursoID(cursoID);

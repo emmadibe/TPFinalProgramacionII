@@ -25,6 +25,14 @@ public class Estudiante extends Persona implements Entidades<Estudiante>
         this.setApellido(apellido);
         this.setDni(dni);
     }
+    public Estudiante(int id, String dni, String nombre, String apellido, int edad)
+    {
+        this.setId(id);
+        this.setNombre(nombre);
+        this.setEdad(edad);
+        this.setApellido(apellido);
+        this.setDni(dni);
+    }
 
     @Override
     public Estudiante crearInstancia() {
@@ -45,6 +53,7 @@ public class Estudiante extends Persona implements Entidades<Estudiante>
     @Override
     public String toString() {
         return "Estudiante{" +
+                "ID='" + this.getId() + '\'' +
                 "dni='" + this.getDni() + '\'' +
                 ", nombre='" + this.getNombre() + '\'' +
                 ", apellido='" + this.getApellido() + '\'' +

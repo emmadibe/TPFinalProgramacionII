@@ -49,6 +49,11 @@ public class ExamenesModelo extends General implements Modelos<Examen>
 
     }
 
+    public int retornarIDUltimoExamenCreado()
+    {
+        return 0;
+    }
+
     @Override
     public void crearTablaBDD()
     {
@@ -105,6 +110,8 @@ public class ExamenesModelo extends General implements Modelos<Examen>
         }
     }
 
+
+
     @Override
     public boolean existeRegistroBDD(Examen examen)
     {
@@ -134,8 +141,44 @@ public class ExamenesModelo extends General implements Modelos<Examen>
         return existe;
     }
 
+    public int retornarUltimoID() {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        int lastId = -1;
+        try {
+            connection = DriverManager.getConnection(dbURL, username, password);
+            statement = connection.createStatement();
+
+            String sql = "SELECT id FROM examenes ORDER BY id DESC LIMIT 1";
+            resultSet = statement.executeQuery(sql);
+
+
+            if (resultSet.next()) {
+                lastId = resultSet.getInt("id");
+
+            } else {
+                System.out.println("No se encontraron registros en la tabla.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return lastId;
+    }
+
     @Override
     public void actualizarBDD(Examen examen) {
 
     }
 }
+
+

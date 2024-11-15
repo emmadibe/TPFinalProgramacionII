@@ -74,4 +74,14 @@ public class ArrayListParaTodos<T>
     {
         return this.arrayList.get(posicion);
     }
+
+    public int tamanio()
+    {
+        return this.arrayList.size();
+    }
+
+    public T retornarElementoPorPosicion(int posicion)
+    {
+        return this.arrayList.get(posicion);
+    }
 }

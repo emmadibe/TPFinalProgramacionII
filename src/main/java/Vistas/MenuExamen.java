@@ -24,6 +24,7 @@ public class MenuExamen implements Menus<Examen>
     {
         switch (opcion){
             case 1:
+
                 break;
             default:
                 System.out.println("Ingresar una opcion válida. ");

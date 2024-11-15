@@ -67,11 +67,12 @@ public class EstudiantesModelo extends General implements Modelos<Estudiante>
                     "WHERE ec.cursoID = " + idCurso + ";";
             resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
+                int id = resultSet.getInt("id");
                 String nombre = resultSet.getString("nombre");
                 String apellido = resultSet.getString("apellido");
                 String dni = resultSet.getString("DNI");
                 int edad = resultSet.getInt("edad");
-                Estudiante estudiante = new Estudiante(dni, nombre, apellido, edad);
+                Estudiante estudiante = new Estudiante(id, dni, nombre, apellido, edad);
                 estudianteArrayListParaTodos.agregar(estudiante);
             }
         }catch (SQLException e){

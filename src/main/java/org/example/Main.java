@@ -6,10 +6,7 @@ import Controlador.TablaIntermediaEstudiantesXExamenControlador;
 import Controlador.TablaIntermediaEstudiantexCursoControlador;
 import Modelos.*;
 import Vistas.MenuDocente;
-import clasesGenerales.Curso;
-import clasesGenerales.Docente;
-import clasesGenerales.Estudiante;
-import clasesGenerales.TablaIntermediaEstudiantesXExamen;
+import clasesGenerales.*;
 import com.codeup.TPFinal.ConexionTPFinal;
 import java.util.Scanner;
 
@@ -21,6 +18,7 @@ public class Main
     public static void main(String[] args)
     {
         ConexionTPFinal.getConnection();
+        TablaIntermediaEstudiantesXExamenControlador tablaIntermediaEstudiantesXExamenControlador = new TablaIntermediaEstudiantesXExamenControlador(1, 1, 1);
         int opcion;
         do{
             Main.opcionesMenuLogueo();

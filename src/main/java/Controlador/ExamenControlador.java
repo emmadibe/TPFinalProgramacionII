@@ -74,6 +74,11 @@ public class ExamenControlador implements Controladores<Examen>
         return examen;
     }
 
+    public int retornarUltimoid()
+    {
+        return examenesModelo.retornarUltimoID();
+    }
+
     @Override
     public void editar(Examen examen) {
 
