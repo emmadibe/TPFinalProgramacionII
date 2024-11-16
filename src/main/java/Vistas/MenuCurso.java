@@ -35,8 +35,13 @@ public class MenuCurso implements Menus<Curso>
         switch (opcion){
             case 1:
                 break;
-            case 2:
-                estudianteControlador.crear();
+            case 2: //Agregar un alumno al curso
+                int flag = 0;
+                do {
+                    estudianteControlador.crear();
+                    System.out.println("Presionar cualquier numero, para agregar otro alumno; 0, para salir.");
+                    flag = ingresar.nextInt();
+                }while (flag != 0);
                 break;
             case 3: //Ver todos los alumnos del curso.
                 estudianteArrayListParaTodos = estudianteControlador.traer();

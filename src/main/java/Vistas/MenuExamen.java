@@ -1,6 +1,9 @@
 package Vistas;
 
+import Controlador.TablaIntermediaEstudiantesXExamenControlador;
+import clasesGenerales.ArrayListParaTodos;
 import clasesGenerales.Examen;
+import clasesGenerales.TablaIntermediaEstudiantesXExamen;
 import interfaces.Menus;
 
 import java.util.Scanner;
@@ -16,6 +19,7 @@ public class MenuExamen implements Menus<Examen>
         do{
             this.opciones(examen);
             opcion = ingresar.nextInt();
+            this.menuPrincipal(opcion, examen);
         }while (opcion != 0);
     }
 
@@ -24,7 +28,7 @@ public class MenuExamen implements Menus<Examen>
     {
         switch (opcion){
             case 1:
-
+                ExamenVistas.subirNotaDeAlumno(examen);
                 break;
             default:
                 System.out.println("Ingresar una opcion válida. ");

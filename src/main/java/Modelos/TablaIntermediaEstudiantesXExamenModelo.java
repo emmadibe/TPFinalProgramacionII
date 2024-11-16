@@ -1,8 +1,11 @@
 package Modelos;
 
+import clasesGenerales.ArrayListParaTodos;
+import clasesGenerales.TablaIntermediaEstudiantesXExamen;
 import interfaces.ModelosTablasIntermedias;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class TablaIntermediaEstudiantesXExamenModelo extends General
@@ -31,6 +34,61 @@ public class TablaIntermediaEstudiantesXExamenModelo extends General
                 e.printStackTrace();
             }
         }
+    }
+
+    public void actualizar(int nota, int estudianteID)
+    {
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            connection = DriverManager.getConnection(dbURL, username, password);
+            statement = connection.createStatement();
+            String sql = "UPDATE tablaintermediaestudiantesxexamen SET nota = " + nota + " WHERE estudianteID = " + estudianteID;
+            statement.executeUpdate(sql);
+            System.out.println("nota subida.");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if(connection != null) connection.close();
+                if(statement != null) statement.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public ArrayListParaTodos<TablaIntermediaEstudiantesXExamen> traerTodo(int examenID) //e traigo todos los registros en donde coincidan con el id del examen
+    {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        ArrayListParaTodos<TablaIntermediaEstudiantesXExamen> arrayListParaTodos = new ArrayListParaTodos<TablaIntermediaEstudiantesXExamen>(100);
+        try {
+            connection = DriverManager.getConnection(dbURL, username, password);
+            statement = connection.createStatement();
+            String sql = "SELECT t.id, t.examenID, t.estudianteID, t.nota, CONCAT(e.nombre, ' ', e.apellido) AS nombreYApellido, e.dni FROM tablaintermediaestudiantesxexamen t INNER JOIN estudiantes e ON t.estudianteID = e.id WHERE t.examenID = " + examenID;
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                int estudianteID = resultSet.getInt("estudianteID");
+                int nota = resultSet.getInt("nota");
+                String nombreYApellidoAlumno = resultSet.getString("nombreYApellido");
+                String dniAlumno = resultSet.getString("DNI");
+                TablaIntermediaEstudiantesXExamen tI = new TablaIntermediaEstudiantesXExamen(id, examenID, estudianteID, nota, nombreYApellidoAlumno, dniAlumno);
+                arrayListParaTodos.agregar(tI);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if(connection != null) connection.close();
+                if(statement != null) statement.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return arrayListParaTodos;
     }
 
     public void crearTablaIntermedia()

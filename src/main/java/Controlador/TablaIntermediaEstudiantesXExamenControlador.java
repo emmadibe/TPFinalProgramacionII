@@ -8,6 +8,7 @@ import clasesGenerales.TablaIntermediaEstudiantesXExamen;
 import interfaces.Controladores;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TablaIntermediaEstudiantesXExamenControlador implements Controladores<TablaIntermediaEstudiantesXExamen>
 {
@@ -35,6 +36,30 @@ public class TablaIntermediaEstudiantesXExamenControlador implements Controlador
         return null;
     }
 
+    public boolean buscarPorNombreYApellido(String nombreApellido, ArrayListParaTodos<TablaIntermediaEstudiantesXExamen> array)
+    {
+        int contador = 0;
+        while (contador < array.tamanio()){
+            if(array.traerElementoPorPosicion(contador).getNombreYApellidoAlumno().equals(nombreApellido)){
+                return true;
+            }
+            contador++;
+        }
+        return false;
+    }
+
+    public int retornarIdEstudiantePorNombreYApellido(String nombreApellido, ArrayListParaTodos<TablaIntermediaEstudiantesXExamen> array)
+    {
+        int id = -1;
+        int i = 0;
+        while (i < array.tamanio()){
+            if(array.traerElementoPorPosicion(i).getNombreYApellidoAlumno().equals(nombreApellido)){
+                id = array.traerElementoPorPosicion(i).getId();
+                break;
+            }
+        }
+        return id;
+    }
     @Override
     public boolean existeTabla() {
         return General.existeTabla("TablaIntermediaEstudiantesXExamen");
@@ -65,8 +90,8 @@ public class TablaIntermediaEstudiantesXExamenControlador implements Controlador
     }
 
     @Override
-    public ArrayListParaTodos traer() {
-        return null;
+    public ArrayListParaTodos<TablaIntermediaEstudiantesXExamen> traer() {
+        return tablaIntermediaEstudiantesXExamenModelo.traerTodo(this.getExamenID());
     }
 
     @Override
