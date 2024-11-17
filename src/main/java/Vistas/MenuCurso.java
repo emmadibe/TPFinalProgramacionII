@@ -51,7 +51,7 @@ public class MenuCurso implements Menus<Curso>
                 examenControlador.crear();
                 int examenID = examenControlador.retornarUltimoid();
                 TablaIntermediaEstudiantesXExamenControlador tablaIntermediaEstudiantesXExamenControlador = new TablaIntermediaEstudiantesXExamenControlador(examenID, curso.getId());
-                tablaIntermediaEstudiantesXExamenControlador.crear();
+                tablaIntermediaEstudiantesXExamenControlador.crear(); //Creo todos los registros de la tabla intermedia entre examenes y alumnos.
                 break;
             case 5: //Entrar a un examen.
                 Examen examen = examenControlador.existe();
@@ -61,6 +61,9 @@ public class MenuCurso implements Menus<Curso>
                 }else{
                     System.out.println("No existe un examen con ese id.");
                 }
+                break;
+            case 6: //Veo todos los exámenes que pertenecen a este curso.
+                ExamenVistas.verTodosLosExamenesDelCurso(curso.getId());
                 break;
             default:
                 System.out.println("Opcion no valida.");
@@ -82,5 +85,7 @@ public class MenuCurso implements Menus<Curso>
         System.out.println("3)Ver todos los alumnos");
         System.out.println("4)Crear un examen nuevo");
         System.out.println("5)Ir a un examen del curso");
+        System.out.println("6)Ver todos los exámenes del curso.");
+        System.out.println("7)Ver todas las notas de todos los alumnos en todos los exámeens del curso.");
     }
 }

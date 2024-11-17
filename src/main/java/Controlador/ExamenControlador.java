@@ -40,8 +40,14 @@ public class ExamenControlador implements Controladores<Examen>
     }
 
     @Override
-    public ArrayListParaTodos<Curso> traer() {
-        return null;
+    public ArrayListParaTodos<Examen> traer()
+    {
+        ArrayListParaTodos<Examen> arrayExamenes = new ArrayListParaTodos<Examen>(100);
+        ExamenesModelo examenesModelo = new ExamenesModelo();
+        if(this.existeTabla()){
+            arrayExamenes = examenesModelo.traerTodos(this.getCursoID());
+        }
+        return arrayExamenes;
     }
 
     public boolean existeRegistro(Examen examen) throws ValorRepetidoException

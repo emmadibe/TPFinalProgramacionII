@@ -56,7 +56,7 @@ public class MenuDocente implements Menus<Docente>
                     MenuCurso menuCurso = new MenuCurso();
                     menuCurso.menuInicial(curso);
                 }else{
-                    System.out.println("No existe el curso.");
+                    System.out.println("No existe el curso o no le pertenece a usted.");
                 }
                 break;
             default:

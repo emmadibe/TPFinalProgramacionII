@@ -36,29 +36,41 @@ public class TablaIntermediaEstudiantesXExamenModelo extends General
         }
     }
 
-    public void actualizar(int nota, int estudianteID)
-    {
+    public void actualizar(int nota, int registroID) {
         Connection connection = null;
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE tablaintermediaestudiantesxexamen SET nota = ? WHERE id = ?";
+
         try {
+
             connection = DriverManager.getConnection(dbURL, username, password);
-            statement = connection.createStatement();
-            String sql = "UPDATE tablaintermediaestudiantesxexamen SET nota = " + nota + " WHERE estudianteID = " + estudianteID;
-            statement.executeUpdate(sql);
-            System.out.println("nota subida.");
-        }catch (SQLException e){
+
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, nota);
+            preparedStatement.setInt(2, registroID);
+
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Nota subida correctamente.");
+            } else {
+                System.out.println("No se encontró el estudiante con ID: " + registroID);
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                if(connection != null) connection.close();
-                if(statement != null) statement.close();
-            }catch (SQLException e){
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public ArrayListParaTodos<TablaIntermediaEstudiantesXExamen> traerTodo(int examenID) //e traigo todos los registros en donde coincidan con el id del examen
+    public ArrayListParaTodos<TablaIntermediaEstudiantesXExamen> traerTodo(int examenID) //Me traigo todos los registros en donde coincidan con el id del examen
     {
         Connection connection = null;
         Statement statement = null;

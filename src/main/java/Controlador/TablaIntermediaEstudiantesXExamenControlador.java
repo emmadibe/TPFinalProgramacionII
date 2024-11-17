@@ -57,6 +57,7 @@ public class TablaIntermediaEstudiantesXExamenControlador implements Controlador
                 id = array.traerElementoPorPosicion(i).getId();
                 break;
             }
+            i++;
         }
         return id;
     }

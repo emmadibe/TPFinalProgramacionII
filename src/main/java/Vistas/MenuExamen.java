@@ -27,7 +27,7 @@ public class MenuExamen implements Menus<Examen>
     public void menuPrincipal(int opcion, Examen examen)
     {
         switch (opcion){
-            case 1:
+            case 1: //Agregar / cambiar nota de alumno.
                 ExamenVistas.subirNotaDeAlumno(examen);
                 break;
             default:
@@ -42,9 +42,9 @@ public class MenuExamen implements Menus<Examen>
         System.out.println("Usted ha ingresado al examen: ");
         examen.imprimirUnaInstancia();
         System.out.println("Qué desea hacer?");
-        System.out.println("1)Agregar notas a los alumnos.");
-        System.out.println("2)Editar nota de un alumno.");
-        System.out.println("3) Eliminar la nota de un alumno.");
+        System.out.println("1)Agregar o notas a los alumnos.");
+        System.out.println("2) Eliminar la nota de un alumno.");
+        System.out.println("3) Ver todas las notas de todos los alumnos en el examen.");
         System.out.println("0) Volver al menú del curso.");
     }
 }

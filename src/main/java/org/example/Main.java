@@ -5,6 +5,7 @@ import Controlador.ExamenControlador;
 import Controlador.TablaIntermediaEstudiantesXExamenControlador;
 import Controlador.TablaIntermediaEstudiantexCursoControlador;
 import Modelos.*;
+import Vistas.ExamenVistas;
 import Vistas.MenuDocente;
 import Vistas.MenuExamen;
 import clasesGenerales.*;

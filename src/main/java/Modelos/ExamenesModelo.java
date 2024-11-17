@@ -49,6 +49,11 @@ public class ExamenesModelo extends General implements Modelos<Examen>
 
     }
 
+    public ArrayListParaTodos<Examen> traerNotasDeTodosLosAlumnosDeTodosLosExamenesDelCurso(int cursoID)
+    {
+        return null;
+    }
+
     public int retornarIDUltimoExamenCreado()
     {
         return 0;
