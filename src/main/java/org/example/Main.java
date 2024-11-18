@@ -20,7 +20,10 @@ public class Main
     public static void main(String[] args)
     {
         ConexionTPFinal.getConnection();
-        int opcion;
+        MostrarTodoModelo mostrarTodoModelo = new MostrarTodoModelo();
+        ArrayListParaTodos<MostrarTodo> array = mostrarTodoModelo.traerTodos(2);
+        array.imprimirTodos();
+       int opcion;
         do{
             Main.opcionesMenuLogueo();
             opcion = ingresar.nextInt();
