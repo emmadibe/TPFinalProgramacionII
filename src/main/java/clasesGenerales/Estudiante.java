@@ -84,6 +84,9 @@ public class Estudiante extends Persona implements Entidades<Estudiante> {
                 if (atributo.equals("dni") && !nuevoValor.matches("\\d{8}")) {
                     throw new IllegalArgumentException("El DNI debe tener 8 numeros");
                 }
+                if ((atributo.equalsIgnoreCase("nombre") || atributo.equalsIgnoreCase("apellido") && !nuevoValor.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+"))){
+                    throw new IllegalArgumentException("El nombre y apellido solo pueden contener letras");
+                }
                 if (nuevoValor.isEmpty()) {
                     throw new IllegalArgumentException("El valor no puede quedar vacio");
                 }
