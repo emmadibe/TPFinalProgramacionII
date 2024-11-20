@@ -25,7 +25,7 @@ public class ArrayListParaTodos<T>
     public void imprimirTodos()
     {
         for(T t : this.arrayList){
-            System.out.println(t);//Automáticamente, si no aclaro, se aplica el método toString, el cual lo sobreescribí.
+            System.out.println(t);//Automáticamente, si no aclaro, se aplica el metodo toString, el cual lo sobreescribí.
         }
     }
 
@@ -35,7 +35,7 @@ public class ArrayListParaTodos<T>
     }
 
     public boolean existeIdEnArrayList(int idBuscado) throws NoExisteIdException
-    { //Este método va a buscar en el ArrayList genérico si existe una instancia de la clase T que tenga en su atributo id el entero que le paso por parámetro. De encontrarlo, retorna true; sino, false.
+    { //Este metodo va a buscar en el ArrayList generico si existe una instancia de la clase T que tenga en su atributo id el entero que le paso por parámetro. De encontrarlo, retorna true; sino, false.
         for (T t : this.arrayList) { //Este es un bucle for each.
             try {
                 Field campoId = t.getClass().getDeclaredField("id"); //La clase Field en Java es una parte del paquete de java.lang.reflect. Me otorga métodos para acceder y manipular los campos de una clase.
