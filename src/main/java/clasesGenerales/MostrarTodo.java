@@ -1,5 +1,10 @@
 package clasesGenerales;
 
+import Modelos.MostrarTodoModelo;
+
+import java.util.Vector;
+import javax.swing.*;
+
 public class MostrarTodo
 {
     int estudianteID;
@@ -30,6 +35,28 @@ public class MostrarTodo
                 ", nota=" + nota +
                 '}';
     }
+
+//
+
+//    public void imprimirTabla()
+//    {
+//        try {
+////////            Vector<Vector<Object>> data = DataFetcher.getData();
+////////            Vector<String> columnNames = DataFetcher.getColumnNames();
+//////
+//////            JTable table = new JTable(data, columnNames);
+//////            JScrollPane scrollPane = new JScrollPane(table);
+//////
+//////            JFrame frame = new JFrame("Datos de la Base de Datos");
+//////            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//////            frame.add(scrollPane);
+//////            frame.setSize(500, 300);
+//////            frame.setVisible(true);
+//////        } catch (Exception e) {
+//////            e.printStackTrace();
+//////        }
+////    }
+//    //}
 
     public int getEstudianteID() {
         return estudianteID;

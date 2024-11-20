@@ -1,9 +1,6 @@
 package org.example;
 
-import Controlador.DocenteControlador;
-import Controlador.ExamenControlador;
-import Controlador.TablaIntermediaEstudiantesXExamenControlador;
-import Controlador.TablaIntermediaEstudiantexCursoControlador;
+import Controlador.*;
 import Modelos.*;
 import Vistas.ExamenVistas;
 import Vistas.MenuDocente;
@@ -20,9 +17,9 @@ public class Main
     public static void main(String[] args)
     {
         ConexionTPFinal.getConnection();
-        MostrarTodoModelo mostrarTodoModelo = new MostrarTodoModelo();
-        ArrayListParaTodos<MostrarTodo> array = mostrarTodoModelo.traerTodos(2);
-        array.imprimirTodos();
+        MostrarTodoControlador mostrarTodoControlador = new MostrarTodoControlador();
+        Curso curso = new Curso("4toB", 7, "Geografia", "ees69", 1, 2 );
+        mostrarTodoControlador.mostrarTabla(curso);
        int opcion;
         do{
             Main.opcionesMenuLogueo();
